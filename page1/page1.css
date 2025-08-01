@@ -1,0 +1,69 @@
+body {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #c471f5 0%, #fa71cd 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+}
+
+.entry-container {
+  background: rgba(255,255,255,0.11);
+  border-radius: 28px;
+  box-shadow: 0 12px 40px #74008520;
+  padding: 60px 44px 48px 44px;
+  text-align: center;
+  width: 370px;
+}
+
+.logo-holder img {
+  width: 85px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  margin: 15px 0 35px 0;
+  font-size: 2.1rem;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+form label {
+  font-size: 1.05rem;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: block;
+}
+
+input[type="text"] {
+  width: 90%;
+  padding: 13px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  margin-top: 10px;
+  margin-bottom: 26px;
+  background: #fff9;
+  outline: none;
+}
+
+#get-started-btn {
+  width: 92%;
+  padding: 13px;
+  font-size: 1.12rem;
+  border: none;
+  border-radius: 15px;
+  background: linear-gradient(90deg, #581f94, #d72660);
+  color: white;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #d7266030;
+  transition: background .2s;
+}
+
+#get-started-btn:hover {
+  background: linear-gradient(90deg, #d72660, #581f94);
+}
