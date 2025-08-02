@@ -2,20 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Get Started | LangX</title>
-  <link rel="stylesheet" href="page1.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LinguaBuddies</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="page1.css">
+  <!-- Lottie Player for Robot Animation -->
+  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
 </head>
 <body>
-  <div class="entry-container">
-    <div class="logo-holder">
-      <img src="logo.png" alt="Logo" />
-    </div>
-    <h1>Welcome to LangX</h1>
-    <form id="name-form" autocomplete="off">
-      <label for="user-name">Enter your name</label>
-      <input type="text" id="user-name" name="user-name" maxlength="18" required />
-      <button type="submit" id="get-started-btn">Get Started</button>
-    </form>
+  <div class="wrapper">
+    <!-- Decorative bubbles -->
+    <div class="bg-decor top-left"></div>
+    <div class="bg-decor bottom-right"></div>
+    <!-- Lottie Robot Animation -->
+    <dotlottie-wc 
+      src="https://lottie.host/e11505fc-975b-44c6-9668-b2121c500714/81AM0BzDAY.lottie" 
+      style="width: 300px; height: 300px;" 
+      speed="1" autoplay loop>
+    </dotlottie-wc>
+
+    <!-- Title -->
+    <h1>Welcome to LinguaBuddies</h1>
+
+    <!-- Name Input -->
+    <label for="username" class="name-label">What should we call you, brave adventurer?</label>
+    <input type="text" id="username" placeholder="Enter your name here..." />
+
+    <!-- Start Button -->
+    <button class="start-btn" id="startBtn">
+      🚀 Let’s Go on a Lingo Adventure!
+    </button>
   </div>
   <script src="page1.js"></script>
 </body>

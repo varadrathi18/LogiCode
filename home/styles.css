@@ -11,6 +11,7 @@ body, html {
   display: flex;
   height: 100vh;
   min-height: 100vh;
+  
 }
 
 .sidebar {
@@ -255,4 +256,31 @@ header {
   .main-content {
     padding: 18px 5vw;
   }
+  
+  .sticker {
+  position: absolute;   /* or 'fixed' if you want it to stay during scroll */
+  top: 30px;
+  left: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background: white;
+  padding: 10px;
+  width: fit-content;
+  transition: transform 0.3s ease;
+  z-index: 10;
+}
+
+.sticker:hover {
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.sticker img {
+  width: 180px;  /* or any smaller size */
+  border-radius: 15px;
+  display: block;
+}
+
+
+
+  
 }

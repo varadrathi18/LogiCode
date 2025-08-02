@@ -1,8 +1,9 @@
-document.getElementById('name-form').onsubmit = function(e) {
-  e.preventDefault();
-  let name = document.getElementById('user-name').value.trim();
-  if(name) {
-    localStorage.setItem('langx-username', name);
-    window.location.href = '../page2/page2.html';
+document.getElementById('startBtn').onclick = function() {
+  const username = document.getElementById('username').value.trim();
+  if (username === "") {
+    alert("Please enter your name to begin the adventure!");
+    return;
   }
+  localStorage.setItem("langx-username", username);
+  window.location.href = "../page2/page2.html"; // change this to your NEXT onboarding page
 };
