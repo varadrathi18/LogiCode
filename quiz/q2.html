@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Q2 | German Beginner</title>
+<link rel="stylesheet" href="quiz.css"/>
+</head><body>
+<div class="container">
+  <div class="status-bar">
+    <div class="item"><img src="../icons/heart-5.png"/><span id="lives-count"></span></div>
+    <div class="item"><img src="../icons/points2.png"/><span id="points-count"></span></div>
+  </div>
+  <div class="question">2. How do you say “thank you”?</div>
+  <ul class="options">
+    <li onclick="handleAnswer(true)">Danke</li>
+    <li onclick="handleAnswer(false,'Danke')">Bitte</li>
+    <li onclick="handleAnswer(false,'Danke')">Entschuldigung</li>
+    <li onclick="handleAnswer(false,'Danke')">Hallo</li>
+  </ul>
+  <div id="feedback" class="feedback"></div>
+  <button id="next-btn" onclick="location.href='q3.html'" style="display:none;">Next</button>
+</div>
+<script src="quiz.js"></script>
+</body></html>

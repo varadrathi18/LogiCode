@@ -14,8 +14,17 @@ document.querySelectorAll('.level-card').forEach(card => {
     // Save level selection
     const level = this.getAttribute('data-level');
     localStorage.setItem('langx-level', level);
-    setTimeout(() => {
-      window.location.href = '../home/index.html';
-    }, 350);
+    // setTimeout(() => {
+    //   window.location.href = '../homeF/index.html';
+    // }, 350);
+       if (level === 'Beginner') {
+      window.location.href = '../homeFB/index.html';
+    }
+        if (level === 'Intermediate') {
+      window.location.href = '../homeFI/index.html';
+    }
+        if (level === 'Pro') {
+      window.location.href = '../homeFP/index.html';
+    }
   };
 });

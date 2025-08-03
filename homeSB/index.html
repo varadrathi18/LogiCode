@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LangX — Hackathon Language Hub</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="home-page">
+    <aside class="sidebar">
+      <div class="profile-section">
+        <img src="profile.png" alt="Profile" class="profile-pic" />
+        <span class="username">User</span>
+
+      </div>
+      <nav>
+        <ul>
+          <li><button class="nav-btn active" id="home-btn">🏠 Home</button></li>
+          <li><button class="nav-btn" id="courses-btn" onclick="window.location.href='../courses/courses.html'">🌐 Courses</button></li>
+          <li><button class="nav-btn" id="Explore-btn"  onclick="window.location.href='../explore/Sexp.html'" >🌍 Explore</button></li>
+          <li><button class="nav-btn" id="settings-btn">⚙ Settings</button></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <header>
+        <div class="stats">
+          <div class="stat-card">
+            <img src="points2.png" alt="Points" class="icon"/>
+            <span id="points">0</span>
+            <label>Points</label>
+          </div>
+          <!-- ...inside your stat-card for Lives... -->
+<div class="stat-card">
+  <span class="heart-container">
+    <img id="hearts-img" src="heart-5.png" alt="Lives"/>
+  </span>
+  <span id="lives">5</span>
+  <label>Lives</label>
+</div>
+
+          <div class="stat-card">
+            <img src="finaldiam.png" height="40px" width="40px" alt="Gems" class="icon"/>
+            <span id="gems">150</span>
+            <label>Gems</label>
+          </div>
+        </div>
+        <button class="start-btn" id="lesson-start-btn">Start Lesson</button>
+      </header>
+      <section class="welcome-section">
+        <h1>Welcome to fluento <span class="username-inline">User</span>!</h1>
+
+        <div class="sticker">
+  <img src="https://www.busuu.com/user/pages/home/_01-header/busuu-header-hello.png" 
+       alt="Language Sticker" height="400px" width="800px">
+</div>
+
+      </section>
+      <section class="features-grid">
+  <div class="feature-card" onclick="window.location.href='daily-goal.html'">
+    <h2>Daily Goal</h2>
+    <p>20 XP/day</p>
+    <progress value="12" max="20"></progress>
+  </div>
+
+  <div class="feature-card" onclick="window.location.href='achievements.html'">
+    <h2>Achievements</h2>
+    <p>Unlock badges as you progress.</p>
+  </div>
+
+  <div class="feature-card" onclick="window.location.href='quests.html'">
+    <h2>Quests</h2>
+    <p>Complete unique challenges for bonus points.</p>
+  </div>
+</section>
+    </main>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>

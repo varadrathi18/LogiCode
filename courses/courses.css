@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: linear-gradient(135deg, #232526 0%, #1a2980 50%, #26d0de 100%);
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.courses-wrapper {
+  width: 90vw;
+  max-width: 800px;
+  padding: 42px 36px 24px 36px;
+  border-radius: 28px;
+  box-shadow: 0 12px 44px #0187d053, 0 6px 22px #412be824;
+  background: rgba(255,255,255,0.93);
+  margin: 36px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1453c5;
+  letter-spacing: .6px;
+  margin-bottom: 35px;
+  background: linear-gradient(90deg,#2fa1d6 30%, #ae29c5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.comparison-table {
+  width: 100%;
+  border-radius: 17px;
+  overflow: hidden;
+  margin: 0 auto 36px auto;
+  background: rgba(158, 227, 255,0.09);
+  box-shadow: 0 2px 18px #2fa1d629;
+  border-collapse: separate;
+}
+
+.table-row, .table-header {
+  display: flex;
+  align-items: center;
+}
+
+.table-header {
+  background: linear-gradient(90deg, #2fa1d6 10%, #ae29c5 100%);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  padding: 13px 0;
+}
+
+.table-row {
+  background: rgba(255,255,255,0.86);
+  border-bottom: 1px solid #eaeaea;
+  font-size: 1rem;
+  transition: background 0.21s;
+}
+.table-row:last-child {
+  border-bottom: none;
+}
+.table-row:hover {
+  background: #eaf6ff;
+}
+
+.table-feature {
+  min-width: 210px;
+  text-align: left;
+  padding: 12px 18px;
+  color: #12406a;
+  font-weight: 600;
+  letter-spacing: .3px;
+}
+
+.table-col {
+  flex: 1 1 100px;
+  text-align: center;
+  font-size: 1.19rem;
+  color: #29b108;
+}
+.table-col.premium {
+  color: #ad28c4;
+}
+
+.tick {
+  color: #31b914;
+  font-weight: bold;
+  font-size: 1.18em;
+}
+
+.cross {
+  color: #d72660;
+  font-weight: bold;
+  font-size: 1.18em;
+}
+
+.plans-title {
+  font-size: 1.3rem;
+  color: #2d2067;
+  margin: 30px 0 18px 0;
+  letter-spacing: .3px;
+  font-weight: 700;
+}
+
+.plans-row {
+  display: flex;
+  gap: 22px;
+  justify-content: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.plan-card {
+  background: linear-gradient(120deg, #f9fbff 70%, #dae2fe 100%);
+  border-radius: 17px;
+  box-shadow: 0 2px 13px #1453c532;
+  padding: 29px 28px 18px 28px;
+  min-width: 170px;
+  text-align: center;
+  position: relative;
+  transition: box-shadow .18s, transform .18s;
+}
+
+.plan-card:hover, .plan-card.selected {
+  box-shadow: 0 7px 34px #ae29c570;
+  transform: translateY(-7px) scale(1.03);
+}
+
+.plan-duration {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #491ba5;
+  margin-bottom: 9px;
+  letter-spacing: .4px;
+}
+
+.plan-price {
+  font-size: 1.6rem;
+  color: #29b108;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.choose-btn {
+  font-size: 1.07rem;
+  font-weight: 600;
+  padding: 9px 24px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(90deg,#2fa1d6,#5917c5);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 1px 6px #2fa1d629;
+  transition: background .18s, color .18s;
+}
+.choose-btn:hover {
+  background: linear-gradient(90deg,#5917c5,#2fa1d6);
+  color: #fbc2eb;
+}
+
+.back-link {
+  margin-top: 13px;
+  font-size: 0.98rem;
+}
+.back-link a {
+  color: #5917c5;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color .2s;
+}
+.back-link a:hover {
+  color: #da10b8;
+}
+
+@media (max-width: 600px) {
+  .courses-wrapper { padding: 16px 0 12px 0; }
+  .plans-row { flex-direction: column; gap: 12px; }
+  .plan-card { min-width: 90%; }
+}
