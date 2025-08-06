@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Quiz Complete</title>
+<link rel="stylesheet" href="audio-quiz.css" />
+<style>
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+  }
+  .popup {
+    background: #fff;
+    padding: 42px 36px;
+    border-radius: 24px;
+    max-width: 400px;
+    width: 90vw;
+    text-align: center;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    font-family: 'Poppins', sans-serif;
+    color: #1a213a;
+    font-weight: 700;
+  }
+  .popup h1 {
+    font-size: 2.1rem;
+    margin-bottom: 16px;
+  }
+  .popup button {
+    background: linear-gradient(90deg, #49c6e5, #47e5bc);
+    color: #fff;
+    font-size: 1.15rem;
+    padding: 14px 32px;
+    border: none;
+    border-radius:22px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .popup button:hover {
+    background: linear-gradient(90deg, #38bdd0, #ffe066);
+    color: #1a213a;
+  }
+</style>
+</head>
+<body>
+<script>
+  window.onload = () => {
+    const popup = document.createElement('div');
+    popup.className = 'popup-overlay';
+    popup.innerHTML = `
+      <div class="popup">
+        <h1>Congratulations!</h1>
+        <p>Congratulations! You have successfully completed the French course 🎉🎉</p>
+        <button onclick="window.location.href='../../home.html'">Return to Home Page</button>
+      </div>
+    `;
+    document.body.appendChild(popup);
+  };
+</script>
+</body>
+</html>

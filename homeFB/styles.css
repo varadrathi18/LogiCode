@@ -120,8 +120,8 @@ header {
 
 .stat-card {
   background: rgba(33, 35, 56, 0.85);
-  border-radius: 12px;
-  padding: 16px 24px;
+  border-radius: 8px;
+  padding: 12px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -260,7 +260,7 @@ header {
   .sticker {
   position: absolute;   /* or 'fixed' if you want it to stay during scroll */
   top: 30px;
-  left: 30px;
+  left: 70px;
   border-radius: 20px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   background: white;

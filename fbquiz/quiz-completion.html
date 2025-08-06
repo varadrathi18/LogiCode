@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Quiz Complete</title>
+<link rel="stylesheet" href="audio-quiz.css"/>
+
+<style>
+  .completion-content {
+    background: rgba(255,255,255,0.9);
+    border-radius: 24px;
+    padding: 50px 40px;
+    text-align: center;
+    box-shadow: 0 8px 36px rgba(0,0,0,0.12);
+    width: 90%;
+    max-width: 480px;
+    margin: 32px auto;
+    color: #2d3559;
+  }
+  button {
+    margin: 14px 18px;
+    padding: 14px 34px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 22px;
+    color: white;
+    cursor: pointer;
+    background: linear-gradient(90deg, #49c6e5, #47e5bc);
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: linear-gradient(90deg, #38bdd0, #ffe066);
+    color: #1a213a;
+  }
+</style>
+
+</head>
+<body style="background: linear-gradient(130deg, #b6e0fe 0%, #f8fafc 90%)">
+  <div class="completion-content">
+    <h1>Congratulations!</h1>
+    <p>Congratulations! You have successfully completed the French Beginner course 🎉🎉</p>
+    <p>Your total points: <strong id="final-points">0</strong></p>
+    <div>
+      <button onclick="window.location.href='../fiquiz/french-intermediate-q1.html'">Go to Intermediate Level</button>
+      <button onclick="window.location.href='../../home.html'">Go to Home</button>
+    </div>
+  </div>
+  <script>
+    document.getElementById('final-points').textContent = localStorage.getItem('quizPoints') || '0';
+  </script>
+</body>
+</html>

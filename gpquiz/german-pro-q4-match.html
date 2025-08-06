@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bonus! Match the Pairs | German Beginner</title>
+  <link rel="stylesheet" href="audio-quiz.css" />
+  <style>
+    .match-container {
+      width: 90%;
+      max-width: 620px;
+      margin: auto;
+      background: rgba(255,255,255,0.75);
+      border-radius: 24px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.1);
+      padding: 28px 18px 42px 18px;
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      user-select: none;
+      flex-wrap: nowrap;
+    }
+    .list {
+      flex: 1;
+      list-style: none;
+      padding: 0 12px;
+      background: #d2eafb;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px #88b3e9aa;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      cursor: default;
+    }
+    .list li {
+      background: #ffffffcc;
+      border-radius: 13px;
+      padding: 14px 18px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #134dc1;
+      text-align: center;
+      border: 3px solid transparent;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+    .list li.dragging {
+      opacity: 0.6;
+      background-color: #54a0ff;
+      color: white;
+      border-color: #0d3b99;
+    }
+    .list li.matched {
+      background-color: #38bdd0;
+      color: white;
+      border-color: #1a2980;
+      cursor: default;
+    }
+    .list li.over {
+      border-color: #61dafb;
+    }
+    #popup-zone .popup {
+      min-width: 280px !important;
+    }
+    @media(max-width: 650px) {
+      .match-container {
+        flex-wrap: wrap;
+        margin: 12px auto 28px auto;
+      }
+      .list {
+        min-height: 220px;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-bg" style="background-image: url('background4.jpg');">
+    <div class="quiz-topbar">
+      <div class="quiz-progress">
+        <div class="progress-dot active"></div>
+        <div class="progress-dot active"></div>
+        <div class="progress-dot active"></div>
+        <div class="progress-dot active"></div>
+        <div class="progress-dot"></div>
+      </div>
+      <div class="status-info">
+        <div class="item"><img src="../lives.png" alt="Lives" /><span id="lives-count"></span></div>
+        <div class="item"><img src="../points2.png" alt="Points" /><span id="points-count"></span></div>
+      </div>
+    </div>
+    <div class="quiz-content">
+      <h2>Bonus Question! Match the German Words with their English Meanings</h2>
+      <div class="match-container" id="match-container">
+        <ul id="german-list" class="list" aria-label="German Words" role="list">
+<li draggable="true" data-pair="1">Geschenk</li>
+<li draggable="true" data-pair="2">Freund</li>
+<li draggable="true" data-pair="3">Wasser</li>
+<li draggable="true" data-pair="4">Straße</li>
+        </ul>
+        <ul id="english-list" class="list" aria-label="English Meanings" role="list">
+<li data-pair="3">Water</li>
+<li data-pair="1">Gift</li>
+<li data-pair="4">Street</li>
+<li data-pair="2">Friend</li>
+        </ul>
+      </div>
+    </div>
+    <div id="popup-zone"></div>
+  </div>
+
+  <script src="audio-quiz.js"></script>
+  <script>
+    // Bonus match-pair question logic (drag and drop)
+    (function() {
+      // Setup lives/points display
+      function updateStatusBar() {
+        document.getElementById('lives-count').textContent = localStorage.getItem('quizLives') || '5';
+        document.getElementById('points-count').textContent = localStorage.getItem('quizPoints') || '0';
+      }
+      updateStatusBar();
+
+      const germanList = document.getElementById('german-list');
+      const englishList = document.getElementById('english-list');
+      const popupZone = document.getElementById('popup-zone');
+      let dragSrcEl = null;
+
+      // Drag handlers for German words (draggable items)
+      function handleDragStart(e) {
+        dragSrcEl = this;
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', this.dataset.pair);
+        this.classList.add('dragging');
+      }
+
+      function handleDragEnd() {
+        this.classList.remove('dragging');
+      }
+
+      // Move German word if dropped over English word (match check)
+      function handleDrop(e) {
+        e.preventDefault();
+        const draggedPair = e.dataTransfer.getData('text/plain');
+        const targetPair = this.dataset.pair;
+
+        if (draggedPair === targetPair) {
+          // Correct match!
+          // Move dragged element to next to this English word
+          if (!dragSrcEl.classList.contains('matched')) {
+            dragSrcEl.classList.add('matched');
+            this.classList.add('matched');
+            this.textContent += ` ✅`;
+            dragSrcEl.style.opacity = '0.6';
+            dragSrcEl.setAttribute('aria-disabled', true);
+            this.setAttribute('aria-disabled', true);
+          }
+          checkAllMatched();
+        } else {
+          // Wrong match popup
+          showPopup('Oops! You matched the wrong pair. Try again.', false);
+        }
+      }
+
+      function handleDragOver(e) {
+        e.preventDefault();
+      }
+      function handleDragEnter() {
+        this.classList.add('over');
+      }
+      function handleDragLeave() {
+        this.classList.remove('over');
+      }
+
+      // Check if all German words matched (matched class count)
+      function checkAllMatched() {
+        const matchedItems = germanList.querySelectorAll('li.matched').length;
+        if (matchedItems === 4) {
+          // Add 30 points once
+          let pts = parseInt(localStorage.getItem('quizPoints') || '0');
+          pts += 30;
+          localStorage.setItem('quizPoints', pts);
+          updateStatusBar();
+          showPopup('Congratulations! You matched all pairs and earned 30 points.', true, () => {
+            window.location.href = 'german-pro-q5.html';
+          });
+        }
+      }
+
+      // Generic popup function
+      function showPopup(message, isSuccess, onClose) {
+        popupZone.innerHTML = '';
+        let popup = document.createElement('div');
+        popup.className = 'popup-overlay';
+        popup.innerHTML = `
+          <div class="popup">
+            <h1 class="${isSuccess ? '' : 'wrong'}">${isSuccess ? 'Great job!' : 'Oops!'}</h1>
+            <p>${message}</p>
+            <button>Continue</button>
+          </div>
+        `;
+        popupZone.appendChild(popup);
+
+        popup.querySelector('button').focus();
+
+        popup.querySelector('button').onclick = () => {
+          popupZone.innerHTML = '';
+          if (onClose) onClose();
+        };
+      }
+
+      // Initialize draggable German words
+      germanList.querySelectorAll('li').forEach(li => {
+        li.addEventListener('dragstart', handleDragStart);
+        li.addEventListener('dragend', handleDragEnd);
+      });
+      // Initialize droppable English words
+      englishList.querySelectorAll('li').forEach(li => {
+        li.addEventListener('dragover', handleDragOver);
+        li.addEventListener('dragenter', handleDragEnter);
+        li.addEventListener('dragleave', handleDragLeave);
+        li.addEventListener('drop', handleDrop);
+      });
+    })();
+  </script>
+</body>
+</html>

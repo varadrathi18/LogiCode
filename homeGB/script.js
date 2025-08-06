@@ -9,7 +9,7 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
 // Start Lesson button
 const lessonStartBtn = document.getElementById('lesson-start-btn');
 lessonStartBtn.addEventListener('click', () => {
-  alert("Starting your next lesson! (Hook this to your lesson logic.)");
+  alert("Starting your Beginner Quiz!!");
 });
 
 // Change course select to update the welcome display

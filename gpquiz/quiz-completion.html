@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Quiz Complete</title>
+<link rel="stylesheet" href="audio-quiz.css" />
+<style>
+  .completion-popup {
+    background: rgba(255,255,255,0.95);
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    max-width: 440px;
+    margin: 12vh auto;
+    text-align: center;
+    padding: 38px 36px;
+    font-family: 'Poppins', sans-serif;
+    color: #1a213a;
+    font-weight: 600;
+  }
+  .completion-popup h1 {
+    font-size: 2rem;
+  }
+  .completion-popup p {
+    font-size: 1.2rem;
+    margin: 18px 0 34px 0;
+  }
+  .completion-popup button {
+    font-size: 1.04rem;
+    padding: 14px 30px;
+    background: linear-gradient(90deg,#49c6e5,#47e5bc);
+    border: none;
+    border-radius: 22px;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background 0.3s;
+  }
+  .completion-popup button:hover {
+    background: linear-gradient(90deg,#38bdd0,#ffe066);
+    color: #1a213a;
+  }
+</style>
+</head>
+<body style="background: linear-gradient(130deg, #b6e0fe 0%, #f8fafc 90%)">
+  <div class="completion-popup" tabindex="0">
+    <h1>Congratulations!</h1>
+    <p>You have successfully completed the German course 🎉🎉</p>
+    <button onclick="window.location.href='../../home.html'">Return to Home Page</button>
+  </div>
+</body>
+</html>

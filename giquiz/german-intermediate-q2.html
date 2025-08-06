@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>German Intermediate Quiz Q2</title>
+  <link rel="stylesheet" href="audio-quiz.css" />
+</head>
+<body>
+  <div class="quiz-bg" style="background-image: url('background-int2.jpg');">
+    <div class="quiz-topbar">
+      <div class="quiz-progress">
+        <div class="progress-dot active"></div>
+        <div class="progress-dot active"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+      </div>
+      <div class="status-info">
+        <div class="item"><img src="../lives.png" alt="Lives" /><span id="lives-count"></span></div>
+        <div class="item"><img src="../points2.png" alt="Points" /><span id="points-count"></span></div>
+      </div>
+    </div>
+    <div class="quiz-content">
+      <div class="quiz-audio-word">
+        <span id="german-word">Ich hätte gern einen Kaffee, bitte.</span>
+        <button id="play-audio" aria-label="Play Audio">&#9658;
+          <audio id="q-audio" src="gi2.mp3"></audio>
+        </button>
+      </div>
+      <ul class="choices">
+        <li data-correct="true">I would like a coffee, please.</li>
+        <li data-correct="false">I want a tea, please.</li>
+        <li data-correct="false">Can you help me?</li>
+        <li data-correct="false">Where is the café?</li>
+      </ul>
+    </div>
+    <div id="popup-zone"></div>
+  </div>
+  <script src="audio-quiz.js"></script>
+  <script>
+    loadQuestion({
+      answer: "I would like a coffee, please.",
+      next: "german-intermediate-q3.html"
+    });
+  </script>
+</body>
+</html>
+

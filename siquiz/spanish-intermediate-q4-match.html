@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bonus Match the Pairs | Spanish Beginner</title>
+<link rel="stylesheet" href="audio-quiz.css" />
+<style>
+  /* Container and list styling */
+  .match-container {
+    width: 90%;
+    max-width: 620px;
+    margin: auto;
+    background: rgba(255,255,255,0.75);
+    border-radius: 24px;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.1);
+    padding: 28px 18px 42px 18px;
+    display: flex;
+    gap: 48px;
+    justify-content: center;
+    user-select: none;
+    flex-wrap: nowrap;
+  }
+  .list {
+    flex: 1;
+    list-style: none;
+    padding: 0 12px;
+    background: #d2eafb;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px #88b3e9aa;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    cursor: default;
+  }
+  .list li {
+    background: #ffffffcc;
+    border-radius: 13px;
+    padding: 14px 18px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #134dc1;
+    text-align: center;
+    border: 3px solid transparent;
+    transition: border-color 0.2s, background-color 0.2s;
+    user-select: none;
+    cursor: grab;
+  }
+  .list li.dragging {
+    opacity: 0.5;
+    background-color: #54a0ff;
+    color: white;
+    border-color: #0d3b99;
+    cursor: grabbing;
+  }
+  .list li.matched {
+    background-color: #38bdd0;
+    color: white;
+    border-color: #1a2980;
+    cursor: default;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .list li.over {
+    border-color: #61dafb;
+  }
+  #popup-zone .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+  }
+  #popup-zone .popup {
+    background: white;
+    border-radius: 15px;
+    padding: 30px 28px;
+    text-align: center;
+    width: 90%;
+    max-width: 330px;
+    box-shadow: 0 10px 32px rgba(0,0,0,0.15);
+  }
+  #popup-zone .popup h1 {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+  }
+  #popup-zone .popup h1.wrong {
+    color: #d94848;
+  }
+  #popup-zone .popup p {
+    font-size: 1.09rem;
+    margin-bottom: 24px;
+    color: #444;
+  }
+  #popup-zone .popup button {
+    border: none;
+    background: linear-gradient(90deg, #38bdd0, #ffe066);
+    font-weight: 700;
+    color: #1a213a;
+    border-radius: 20px;
+    padding: 10px 28px;
+    cursor: pointer;
+    font-size: 1.05rem;
+    transition: background 0.2s ease;
+    box-shadow: 0 3px 10px #33a6cc69;
+  }
+  #popup-zone .popup button:hover {
+    background: linear-gradient(90deg, #2cb3c5, #ffc53c);
+    color: #192434;
+  }
+  @media(max-width: 650px) {
+    .match-container {
+      flex-wrap: wrap;
+      margin: 12px auto 28px auto;
+    }
+    .list {
+      min-height: 220px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="quiz-bg">
+  <div class="quiz-topbar">
+    <div class="quiz-progress">
+      <div class="progress-dot active"></div>
+      <div class="progress-dot active"></div>
+      <div class="progress-dot active"></div>
+      <div class="progress-dot active"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+    </div>
+    <div class="status-info">
+      <div class="item"><img src="../icons/heart-5.png" alt="Lives" /><span id="lives-count"></span></div>
+      <div class="item"><img src="../icons/points2.png" alt="Points" /><span id="points-count"></span></div>
+    </div>
+  </div>
+  <div class="quiz-content">
+    <h2>Bonus Question! Match the Spanish Words with their English Meanings</h2>
+    <div class="match-container" id="match-container">
+      <ul id="spanish-list" class="list" aria-label="Spanish Words" role="list">
+        <li draggable="true" data-pair="1" tabindex="0">Perro</li>
+        <li draggable="true" data-pair="2" tabindex="0">Casa</li>
+        <li draggable="true" data-pair="3" tabindex="0">Libro</li>
+        <li draggable="true" data-pair="4" tabindex="0">Coche</li>
+      </ul>
+      <ul id="english-list" class="list" aria-label="English Meanings" role="list">
+        <li data-pair="3" tabindex="0">Book</li>
+        <li data-pair="1" tabindex="0">Dog</li>
+        <li data-pair="4" tabindex="0">Car</li>
+        <li data-pair="2" tabindex="0">House</li>
+      </ul>
+    </div>
+  </div>
+  <div id="popup-zone"></div>
+</div>
+
+<script>
+  (function(){
+    const livesCountEl = document.getElementById('lives-count');
+    const pointsCountEl = document.getElementById('points-count');
+    const popupZone = document.getElementById('popup-zone');
+
+    const livesKey = 'sp-beginner-lives';
+    const pointsKey = 'sp-beginner-points';
+
+    if(localStorage.getItem(livesKey) === null) localStorage.setItem(livesKey, '5');
+    if(localStorage.getItem(pointsKey) === null) localStorage.setItem(pointsKey, '0');
+
+    function updateStatus() {
+      livesCountEl.textContent = localStorage.getItem(livesKey);
+      pointsCountEl.textContent = localStorage.getItem(pointsKey);
+    }
+    updateStatus();
+
+    let draggedItem = null;
+    let matchedPairs = 0;
+    let pointsAdded = false;
+
+    const spanishItems = document.querySelectorAll('#spanish-list li');
+    const englishItems = document.querySelectorAll('#english-list li');
+
+    spanishItems.forEach(item => {
+      item.addEventListener('dragstart', e => {
+        if(item.classList.contains('matched')) {
+          e.preventDefault();
+          return;
+        }
+        draggedItem = item;
+        setTimeout(() => item.classList.add('dragging'), 0);
+      });
+      item.addEventListener('dragend', () => {
+        if(draggedItem) draggedItem.classList.remove('dragging');
+        draggedItem = null;
+      });
+    });
+
+    englishItems.forEach(target => {
+      target.addEventListener('dragover', e => e.preventDefault());
+      target.addEventListener('dragenter', e => {
+        if(!target.classList.contains('matched')) target.classList.add('over');
+      });
+      target.addEventListener('dragleave', e => {
+        target.classList.remove('over');
+      });
+      target.addEventListener('drop', e => {
+        e.preventDefault();
+        target.classList.remove('over');
+        if(!draggedItem || draggedItem.classList.contains('matched') || target.classList.contains('matched')) return;
+
+        if(draggedItem.dataset.pair === target.dataset.pair) {
+          draggedItem.classList.add('matched');
+          target.classList.add('matched');
+          draggedItem.textContent += " ✅";
+          target.textContent += " ✅";
+
+          matchedPairs++;
+          if(matchedPairs === 4 && !pointsAdded) {
+            let pts = parseInt(localStorage.getItem(pointsKey) || '0');
+            pts += 30;
+            localStorage.setItem(pointsKey, pts.toString());
+            updateStatus();
+            pointsAdded = true;
+            showPopup('Congratulations! You matched all pairs and earned 30 points.', true, () => {
+              window.location.href = 'spanish-beginner-q5.html'; // Update next page path accordingly
+            });
+          }
+        } else {
+          showPopup('Oops! You matched the wrong pair. Try again.', false);
+        }
+      });
+    });
+
+    function showPopup(message, success, onClose) {
+      popupZone.innerHTML = '';
+      const popup = document.createElement('div');
+      popup.className = 'popup-overlay';
+      popup.innerHTML = `
+        <div class="popup">
+          <h1 class="${success ? '' : 'wrong'}">${success ? 'Great job!' : 'Oops!'}</h1>
+          <p>${message}</p>
+          <button>Continue</button>
+        </div>`;
+      popupZone.appendChild(popup);
+      popup.querySelector('button').focus();
+      popup.querySelector('button').addEventListener('click', () => {
+        popupZone.innerHTML = '';
+        if (onClose) onClose();
+      });
+    }
+  })();
+</script>
+</body>
+</html>
