@@ -1,113 +1,108 @@
-// Initialize lives and points with language-level namespacing:
-// Pass your language-level prefix here, e.g. 'sp-beginner-'
-function initGame(prefix) {
-  if (localStorage.getItem(prefix + 'lives') === null) {
-    localStorage.setItem(prefix + 'lives', '5');
+
+// Only reset lives and points at first question
+(function(){
+  let page = location.pathname.split('/').pop();
+  if (page === "spanish-beginner-q1.html" || page === "spanish-beginner-q1") {
+    localStorage.setItem('quizPoints', "0");
+    localStorage.setItem('quizLives', "5");
   }
-  if (localStorage.getItem(prefix + 'points') === null) {
-    localStorage.setItem(prefix + 'points', '0');
-  }
-}
+})();
 
-// Helpers for lives and points
-function getLives(prefix) {
-  return parseInt(localStorage.getItem(prefix + 'lives') || '5', 10);
+// Utility to update status bars on each page
+function updateStatusBar() {
+  document.getElementById('lives-count').textContent = localStorage.getItem('quizLives') || '5';
+  document.getElementById('points-count').textContent = localStorage.getItem('quizPoints') || '0';
 }
-function setLives(prefix, val) {
-  localStorage.setItem(prefix + 'lives', val.toString());
-}
-function getPoints(prefix) {
-  return parseInt(localStorage.getItem(prefix + 'points') || '0', 10);
-}
-function setPoints(prefix, val) {
-  localStorage.setItem(prefix + 'points', val.toString());
-}
+updateStatusBar();
 
-// Update display
-function updateStatusBar(prefix) {
-  const livesCount = getLives(prefix);
-  const pointsCount = getPoints(prefix);
-  const livesEl = document.getElementById('lives-count');
-  const pointsEl = document.getElementById('points-count');
-  if (livesEl) livesEl.textContent = livesCount;
-  if (pointsEl) pointsEl.textContent = pointsCount;
-}
-
-// Load a question with correct answer, next page, and prefix
-function loadQuestion({answer, next, prefix = 'sp-beginner-'}) {
-  initGame(prefix);
-  updateStatusBar(prefix);
-
-  // Play audio on click of word or button
-  document.querySelectorAll('#play-audio, #spanish-word, #french-word, #german-word, #english-word').forEach(el => {
-    el.onclick = e => {
+function loadQuestion(cfg) {
+  // Support audio play when clicking word or button
+  document.querySelectorAll('#spanish-word, #play-audio').forEach(el => {
+    el.addEventListener('click', function(e) {
       e.preventDefault();
-      const audio = document.getElementById('q-audio');
-      if (audio) audio.play();
-    };
+      document.getElementById('q-audio').play();
+    });
   });
 
+  // Handle user answer
   let answered = false;
-  const options = document.querySelectorAll('.choices li');
-  options.forEach(option => {
-    option.onclick = () => {
+  document.querySelectorAll('.choices li').forEach(option => {
+    option.addEventListener('click', function() {
       if (answered) return;
       answered = true;
 
-      const isCorrect = option.dataset.correct === "true";
-      let points = getPoints(prefix);
-      let lives = getLives(prefix);
-
-      const popupZone = document.getElementById('popup-zone');
-      popupZone.innerHTML = "";
-
+      let isCorrect = option.dataset.correct === "true";
       let popup = document.createElement('div');
       popup.className = 'popup-overlay';
 
-      if (isCorrect) {
+      let lives = parseInt(localStorage.getItem('quizLives') || '5');
+      let points = parseInt(localStorage.getItem('quizPoints') || '0');
+      let outOfLives = false;
+
+      if(isCorrect) {
         points += 20;
-        setPoints(prefix, points);
-        popup.innerHTML = `
+        localStorage.setItem('quizPoints', points);
+      } else {
+        lives = Math.max(0, lives - 1);
+        localStorage.setItem('quizLives', lives);
+        if(lives <= 0) outOfLives = true;
+      }
+
+      updateStatusBar();
+
+      // Popup content
+      let popupHTML = '';
+      if (outOfLives) {
+        popupHTML = `
+          <div class="popup">
+            <h1 class="wrong">No Lives Left!</h1>
+            <p>You've used all your lives.</p>
+            <div class="buy-or-home">
+              <button onclick="window.location.href='../buy-lives.html'">Buy Lives</button>
+              <button onclick="window.location.href='../../home.html'">Go to Home</button>
+            </div>
+          </div>
+        `;
+      } else if (isCorrect) {
+        popupHTML = `
           <div class="popup">
             <h1>Hurray!</h1>
-            <h2>Congratulations! You earned 20 points.</h2>
-            <button id="next-btn">Next Question</button>
-          </div>`;
+            <h2>Congratulations, you earned 20 points!</h2>
+            <button onclick="proceedNext()">Next Question</button>
+          </div>
+        `;
       } else {
-        lives = Math.max(lives - 1, 0);
-        setLives(prefix, lives);
-        if (lives === 0) {
-          popup.innerHTML = `
-            <div class="popup">
-              <h1 class="wrong">No Lives Left!</h1>
-              <p>You've used all your lives.</p>
-              <div style="display:flex;justify-content:center;gap:12px;margin-top:10px;">
-                <button onclick="window.location.href='../buy-lives.html'">Buy Lives</button>
-                <button onclick="window.location.href='../../home.html'">Go to Home</button>
-              </div>
-            </div>`;
-        } else {
-          popup.innerHTML = `
-            <div class="popup">
-              <h1 class="wrong">Oops!</h1>
-              <h2>Your answer is incorrect.<br>Correct answer: <strong>${answer}</strong></h2>
-              <button id="next-btn">Next Question</button>
-            </div>`;
-        }
+        popupHTML = `
+          <div class="popup">
+            <h1 class="wrong">Oops!</h1>
+            <h2 class="wrong">Your answer is incorrect.<br>
+              Correct answer: <span style='color:#134dc1'>${cfg.answer}</span>
+            </h2>
+            <button onclick="proceedNext()">Next Question</button>
+          </div>
+        `;
       }
 
-      popupZone.appendChild(popup);
+      popup.innerHTML = popupHTML;
+      document.body.appendChild(popup);
 
-      updateStatusBar(prefix);
-
-      const nextBtn = document.getElementById('next-btn');
-      if(nextBtn) {
-        nextBtn.onclick = () => {
-          // If lives zero and purchase or home shown - next is no longer valid
-          if(lives === 0) return;
-          window.location.href = next;
-        };
-      }
-    };
+      // Animate/focus popup (optional)
+      document.querySelector('.popup button').focus();
+    });
   });
+
+  // For "Next Question" buttons
+  window.proceedNext = function() {
+    const popup = document.querySelector('.popup-overlay');
+    if (popup) popup.remove();
+
+    // If out of lives, stay
+    let lives = parseInt(localStorage.getItem('quizLives') || '0');
+    if(lives <= 0) return;
+
+    // Else, go to next
+    window.location.href = cfg.next;
+  };
 }
+
+document.addEventListener('DOMContentLoaded', updateStatusBar);

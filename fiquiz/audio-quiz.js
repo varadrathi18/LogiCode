@@ -1,7 +1,7 @@
 // Only reset lives and points at first question
 (function(){
   let page = location.pathname.split('/').pop();
-  if (page === "french-quiz-q1.html" || page === "french-quiz-q1") {
+  if (page === "french-beginner-q1.html" || page === "french-beginner-q1") {
     localStorage.setItem('quizPoints', "0");
     localStorage.setItem('quizLives', "5");
   }
@@ -16,7 +16,7 @@ updateStatusBar();
 
 function loadQuestion(cfg) {
   // Support audio play when clicking word or button
-  document.querySelectorAll('#german-word, #play-audio').forEach(el => {
+  document.querySelectorAll('#french-word, #play-audio').forEach(el => {
     el.addEventListener('click', function(e) {
       e.preventDefault();
       document.getElementById('q-audio').play();

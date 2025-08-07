@@ -86,7 +86,7 @@
         <div class="progress-dot"></div>
       </div>
       <div class="status-info">
-        <div class="item"><img src="../lives.png" alt="Lives" /><span id="lives-count"></span></div>
+        <!-- <div class="item"><img src="../lives.png" alt="Lives" /><span id="lives-count"></span></div> -->
         <div class="item"><img src="../points2.png" alt="Points" /><span id="points-count"></span></div>
       </div>
     </div>
@@ -116,7 +116,7 @@
     (function() {
       // Setup lives/points display
       function updateStatusBar() {
-        document.getElementById('lives-count').textContent = localStorage.getItem('quizLives') || '5';
+        // document.getElementById('lives-count').textContent = localStorage.getItem('quizLives') || '5';
         document.getElementById('points-count').textContent = localStorage.getItem('quizPoints') || '0';
       }
       updateStatusBar();
