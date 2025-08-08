@@ -3,80 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LangX — Hackathon Language Hub</title>
+  <title>Fluento - Space Adventure</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="home-page">
-    <aside class="sidebar">
-      <div class="profile-section">
-        <img src="profile.png" alt="Profile" class="profile-pic" />
-        <span class="username">User</span>
 
+  <nav>
+    <div class="logo">Fluento</div>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="../explore/Gexp.html">Explore</a></li>
+      <li><a href="../courses/coursesgp.html">Courses</a></li>
+      <li><a href="../page2/page2.html">Switch</a></li>
+    </ul>
+    <div class="nav-status">
+      <div class="nav-sticker" title="Lives">
+        <img src="../lives.png" alt="Lives" />
+        <span id="nav-lives">5</span>
       </div>
-      <nav>
-        <ul>
-          <li><button class="nav-btn active" id="home-btn">🏠 Home</button></li>
-          <li><button class="nav-btn" id="courses-btn" onclick="window.location.href='../courses/coursesgp.html'">🌐 Courses</button></li>
-          <li><button class="nav-btn" id="Explore-btn"  onclick="window.location.href='../explore/Gexp.html'" >🌍 Explore</button></li>
-          <li><button class="nav-btn" id="switch-btn" onclick="window.location.href='../page2/page2.html'">🔁 Switch</button></li>
-        </ul>
-      </nav>
-    </aside>
-    <main class="main-content">
-      <header>
-        <div class="stats">
-          <div class="stat-card">
-            <img src="points2.png" alt="Points" class="icon"/>
-            <span id="points">0</span>
-            <label>Points</label>
-          </div>
-          <!-- ...inside your stat-card for Lives... -->
-<div class="stat-card">
-  <span class="heart-container">
-    <img id="hearts-img" src="../lives.png" alt="Lives"/>
-  </span>
-  <span id="lives">5</span>
-  <label>Lives</label>
-</div>
+      <div class="nav-sticker" title="Points">
+        <img src="../points2.png" alt="Points" />
+        <span id="nav-points">0</span>
+      </div>
+    </div>
+  </nav>
 
-          <div class="stat-card">
-            <img src="finaldiam.png" height="40px" width="40px" alt="Gems" class="icon"/>
-            <span id="gems">150</span>
-            <label>Gems</label>
-          </div>
-        </div>
-        <button class="start-btn" id="lesson-start-btn">Start Lesson</button>
-      </header>
-      <section class="welcome-section">
-        <h1>Welcome to fluento <span class="username-inline">User</span>!</h1>
+  <section class="hero">
+    <div class="course-badge">
+      <!-- <span class="sparkle">✨</span> -->
+      <span id="course-title">German Pro Course</span>
+      <!-- <span class="sparkle">✨</span> -->
+    </div>
+    <div class="welcome-text">
+      <h1>Welcome to <span>Fluento, Explorer!</span></h1>
+      <p>Master languages and unlock galaxies of knowledge 🚀🌍</p>
+    </div>
+    <button class="hero-btn">Start Quiz</button>
+  </section>
 
-        <div class="sticker">
-  <img src="https://www.busuu.com/user/pages/home/_01-header/busuu-header-hello.png" 
-       alt="Language Sticker" height="400px" width="800px">
-</div>
-
-      </section>
-      <section class="features-grid">
-  <div class="feature-card" onclick="window.location.href='daily-goal.html'">
-    <h2>Daily Goal</h2>
-    <p>20 XP/day</p>
-    <progress value="12" max="20"></progress>
+  <div class="learn-heading">
+    <h2>What do you learn?</h2>
   </div>
 
-  <div class="feature-card" onclick="window.location.href='achievements.html'">
-    <h2>Achievements</h2>
-    <p>Unlock badges as you progress.</p>
-  </div>
+  <section class="features">
+    <div class="feature-card">
+      <img src="../speak.png" alt="Speak">
+      <h3>Speak</h3>
+      <p>Speak with native speakers on any topic you want (not just about the weather). Make friends in different parts of the Earth!</p>
+    </div>
+    <div class="feature-card">
+      <img src="../read.png" alt="Read">
+      <h3>Read</h3>
+      <p>Read literature in the original language. Grow your vocabulary, master the language's grammar, and broaden your horizons!</p>
+    </div>
+    <div class="feature-card">
+      <img src="../understand.png" alt="Understand">
+      <h3>Understand</h3>
+      <p>Understand new things about the foreign country, its culture and traditions. Feel yourself like a piece of something global!</p>
+    </div>
+    <div class="feature-card">
+      <img src="../write.png" alt="Write">
+      <h3>Write</h3>
+      <p>Write to your foreign friends or conduct business correspondence with people from other countries and even continents!</p>
+    </div>
+  </section>
 
-  <div class="feature-card" onclick="window.location.href='quests.html'">
-    <h2>Quests</h2>
-    <p>Complete unique challenges for bonus points.</p>
-  </div>
-</section>
-    </main>
-  </div>
-  
+  <section class="blogs">
+    <h2>Explore Language Tips</h2>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <img src="../bestway.jpeg" alt="Blog 1">
+       <a href="https://blog.thelinguist.com/best-way-to-learn-a-new-language/"><div class="content"><h3>Best Way to Learn a Language</h3></div>
+      </div></a>
+      <div class="blog-card">
+        <img src="../howlong.jpeg" alt="Blog 2">
+        <a href="https://blog.thelinguist.com/how-long-should-it-take-to-learn-a-language/"><div class="content"><h3>How Long to Learn?</h3></div>
+      </div></a>
+      <div class="blog-card">
+        <img src="../boost.jpg" alt="Blog 3">
+       <a href="https://www.lingoda.com/blog/en/language-learning-memory-boost/"><div class="content"><h3>Boost Your Memory</h3></div>
+    </div></a>
+      <!-- <div class="blog-card">
+        <img src="../blog4.webp" alt="Blog 2">
+        <a href="https://blog.thelinguist.com/the-pareto-principle-80-20-rule-language-learning/"><div class="content"><h3>The Pareto Principle (80/20 Rule)</h3></div>
+      </div></a> -->
+    </div>
+  </section>
+
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,55 +1,59 @@
-// Button navigation highlight
-document.querySelectorAll('.nav-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
+// Configuration: Set the localStorage prefix for your current course/language
+const STORAGE_PREFIX = "ge-beginner-";  // Change this as needed per course
 
-// Start Lesson button
-const lessonStartBtn = document.getElementById('lesson-start-btn');
-lessonStartBtn.addEventListener('click', () => {
-  alert("Starting your Beginner Quiz!!");
-});
-
-// Change course select to update the welcome display
-const courseSelect = document.getElementById('course-select');
-courseSelect.addEventListener('change', function(){
-  // For future: dynamically update courses or show lessons
-  alert("Course switched to " + courseSelect.value);
-});
-
-// Images for different lives (ensure these images exist in your project)
-const heartImgs = [
-  'heart-0.png', // 0 lives - empty
-  'heart-1.png', // 1 life left
-  'heart-2.png', // 2 lives
-  'heart-3.png', // 3 lives
-  'heart-4.png', // 4 lives
-  'heart-5.png'  // 5 lives - full
-];
-
-// Update the heart display according to current lives
-function updateHearts(lives) {
-  const heartImg = document.getElementById('hearts-img');
-  if(lives >= 0 && lives <= 5) {
-    heartImg.src = heartImgs[lives];
-  }
-  document.getElementById('lives').textContent = lives;
+// Initialize lives and points in localStorage if not already set
+if (localStorage.getItem(STORAGE_PREFIX + 'lives') === null) {
+  localStorage.setItem(STORAGE_PREFIX + 'lives', '5');
+}
+if (localStorage.getItem(STORAGE_PREFIX + 'points') === null) {
+  localStorage.setItem(STORAGE_PREFIX + 'points', '0');
 }
 
-// EXAMPLE: Decrease lives (you can hook to your app logic)
-let currentLives = 5;
-updateHearts(currentLives);
+/**
+ * Updates the navigation status indicators for lives and points.
+ * Fetches current values from localStorage and updates the text contents.
+ */
+function updateNavStatus() {
+  const lives = localStorage.getItem(STORAGE_PREFIX + 'lives');
+  const points = localStorage.getItem(STORAGE_PREFIX + 'points');
 
-// Example for testing: Remove this in your real app!
-/*
-document.getElementById('lesson-start-btn').onclick = () => {
-  if(currentLives > 0){
-    currentLives--;
-    updateHearts(currentLives);
+  const livesElem = document.getElementById('nav-lives');
+  const pointsElem = document.getElementById('nav-points');
+
+  if (livesElem) {
+    livesElem.textContent = lives !== null ? lives : '5';
   }
-};
-*/
+  if (pointsElem) {
+    pointsElem.textContent = points !== null ? points : '0';
+  }
+}
 
-// (Keep your old JS for button navigation etc!)
+// Initial status update on page load
+updateNavStatus();
+
+// Update the nav status every 2 seconds in case it changes elsewhere
+setInterval(updateNavStatus, 2000);
+
+/**
+ * Handles the Start Quiz button click event.
+ * Redirects the user to the first quiz question page for the course.
+ * Modify the URL as required for your specific quiz start page.
+ */
+function setupStartQuizButton() {
+  const startBtn = document.querySelector('.hero-btn');
+  if (startBtn) {
+    startBtn.addEventListener('click', () => {
+      // Optional: Uncomment to reset lives and points on start
+      // localStorage.setItem(STORAGE_PREFIX + 'lives', '5');
+      // localStorage.setItem(STORAGE_PREFIX + 'points', '0');
+
+      // Navigate to the first quiz question page
+      window.location.href = '../gbquiz/german-beginner-q1.html';  // Update this URL as needed
+    });
+  }
+}
+
+// Setup event listeners after DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  setupStartQuizButton();
+});

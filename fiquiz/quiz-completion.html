@@ -38,15 +38,15 @@
 <body style="background: linear-gradient(130deg, #b6e0fe 0%, #f8fafc 90%)">
   <div class="completion-content">
     <h1>Congratulations!</h1>
-    <p>Congratulations! You have successfully completed the Spanish Intermediate course 🎉🎉</p>
+    <p>Congratulations! You have successfully completed the French Intermediate course 🎉🎉</p>
     <p>Your total points: <strong id="final-points">0</strong></p>
     <div>
       <button onclick="window.location.href='../fpquiz/french-pro-q1.html'">Go to Pro Level</button>
-      <button onclick="window.location.href='../../home.html'">Go to Home</button>
+      <button onclick="window.location.href='../homeFP/index.html'">Go to Home</button>
     </div>
   </div>
   <script>
-    document.getElementById('final-points').textContent = localStorage.getItem('sp-intermediate-points') || '0';
+    document.getElementById('final-points').textContent = localStorage.getItem('fr-intermediate-points') || '0';
   </script>
 </body>
 </html>

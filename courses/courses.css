@@ -10,7 +10,7 @@ body {
   justify-content: center;
 }
 
-.courses-wrapper {
+/* .courses-wrapper {
   width: 90vw;
   max-width: 800px;
   padding: 42px 36px 24px 36px;
@@ -21,6 +21,24 @@ body {
   text-align: center;
   position: relative;
   overflow: hidden;
+} */
+.courses-wrapper {
+  width: 95%;              /* takes more width on small screens */
+  max-width: 730px;       /* bigger white box */
+  padding: 42px 36px 24px 36px;
+  border-radius: 28px;
+  box-shadow: 0 12px 44px #0187d053, 0 6px 22px #412be824;
+  background: rgba(255,255,255,0.93);
+  
+  margin: auto;            /* center horizontally */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  /* Flexbox centering in page */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .title {
@@ -33,12 +51,23 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
+/* 
 .comparison-table {
   width: 100%;
   border-radius: 17px;
   overflow: hidden;
   margin: 0 auto 36px auto;
+  background: rgba(158, 227, 255,0.09);
+  box-shadow: 0 2px 18px #2fa1d629;
+  border-collapse: separate;
+} */
+
+.comparison-table {
+  width: 100%; /* make table stretch across white box */
+  max-width: 1000px; /* control inner table size */
+  margin: 0 auto 36px auto; /* center table */
+  border-radius: 17px;
+  overflow: hidden;
   background: rgba(158, 227, 255,0.09);
   box-shadow: 0 2px 18px #2fa1d629;
   border-collapse: separate;
@@ -69,7 +98,7 @@ body {
 .table-row:hover {
   background: #eaf6ff;
 }
-
+/* 
 .table-feature {
   min-width: 210px;
   text-align: left;
@@ -84,7 +113,24 @@ body {
   text-align: center;
   font-size: 1.19rem;
   color: #29b108;
+} */
+
+.table-feature {
+  flex: 0 0 350px; /* fixed width for feature column */
+  text-align: left;
+  padding: 12px 18px;
+  color: #12406a;
+  font-weight: 600;
+  letter-spacing: .3px;
 }
+
+.table-col {
+  flex: 0 0 120px; /* fixed width for tick/cross columns */
+  text-align: center;
+  font-size: 1.19rem;
+  color: #29b108;
+}
+
 .table-col.premium {
   color: #ad28c4;
 }

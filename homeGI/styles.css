@@ -1,286 +1,195 @@
-body, html {
-  height: 100%;
-  margin: 0;
-  font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(130deg, #232526 0%, #1a2980 50%, #26d0ce 100%);
-  color: #edf6f9;
-  min-height: 100vh;
+* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(180deg, #0d0d2b, #1e1e3f);
+  color: white;
+  overflow-x: hidden;
 }
-
-.home-page {
-  display: flex;
-  height: 100vh;
-  min-height: 100vh;
-  
-}
-
-.sidebar {
-  background: rgba(20, 25, 50, 0.97);
-  width: 260px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 35px 0 25px 0;
-  box-shadow: 2px 0 10px rgba(10,20,40,0.12);
-}
-
-.profile-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 48px;
-}
-
-.profile-pic {
-  width: 82px;
-  height: 82px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 14px #0005;
-}
-
-.username {
-  font-size: 1.15rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-  letter-spacing: .4px;
-}
-
-.streak {
-  display: flex;
-  align-items: center;
-  font-size: 1.01rem;
-  color: #fb8500;
-  font-weight: 500;
-}
-
-.streak .icon-sm {
-  width: 20px;
-  margin-right: 7px;
-}
-
-.heart-container img {
-  width: 34px;
-  height: 34px;
-  vertical-align: middle;
-  transition: filter 0.2s;
-}
-
-
-nav ul {
-  padding: 0;
-  list-style: none;
-}
-
-.nav-btn {
-  display: flex;
-  align-items: center;
-  width: 193px;
-  padding: 12px 18px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 13px;
-  background: none;
-  color: #f2fafd;
-  font-size: 1.08rem;
-  font-weight: 600;
-  letter-spacing: .8px;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-
-.nav-btn.active,
-.nav-btn:hover {
-  background: #49c6e5;
-  color: #292929;
-}
-
-/* Main Content */
-.main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 44px 56px 36px 56px;
-  overflow-y: auto;
-  background: rgba(255,255,255,0.08);
-}
-
-header {
+nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 22px;
+  background-color: #0c0c1f;
+  padding: 20px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
-
-.stats {
+nav .logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #b57eff;
   display: flex;
-  gap: 34px;
-}
-
-.stat-card {
-  background: rgba(33, 35, 56, 0.85);
-  border-radius: 12px;
-  padding: 16px 24px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  min-width: 95px;
-  box-shadow: 0 1px 9px #0001;
-  margin-bottom: 2px;
+  gap: 8px;
 }
-
-.stat-card .icon {
-  width: 32px;
-  margin-bottom: 5px;
+nav .logo::before { content: '🚀'; }
+nav ul { list-style: none; display: flex; gap: 30px; }
+nav ul li a {
+  text-decoration: none; color: white; font-weight: 500; transition: color 0.3s;
 }
-
-.stat-card span {
-  font-size: 1.28rem;
-  font-weight: 700;
+nav ul li a:hover { color: #a56dff; }
+.nav-status {
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
-
-.stat-card label {
-  color: #adb5bd;
-  font-size: .93rem;
-  margin-top: 2px;
-}
-
-.start-btn {
-  font-size: 1.11rem;
+.nav-sticker {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: linear-gradient(90deg, #2a1856 40%, #b57eff 90%);
+  padding: 8px 15px;
+  border-radius: 15px;
+  border:2px solid #a56dff;
+  font-size: 1.12rem;
   font-weight: 600;
-  background: linear-gradient(90deg, #49c6e5, #47e5bc);
-  color: #21284d;
+  color: #ffe7ff;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 12px #b57eff67;
+  backdrop-filter: blur(2px);
+  background-blend-mode: luminosity;
+  text-shadow: 0 2px 7px #1e1e3f44;
+}
+.nav-sticker img {
+  width: 24px; height: 24px; vertical-align: middle;
+  filter: drop-shadow(0 1px 2px #fff4) drop-shadow(0 0 6px #a56dff);
+}
+
+/* Course Badge */
+.course-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  /* Remove button-y box & shadows */
+  background: none;
+  box-shadow: none;
   border: none;
-  border-radius: 22px;
-  padding: 15px 45px;
-  box-shadow: 0 1px 8px #38bdd01a;
-  cursor: pointer;
-  transition: background .2s;
-  margin-left: 24px;
-}
-
-.start-btn:hover {
-  background: linear-gradient(90deg, #38bdd0, #ffe066);
-  color: #1a213a;
-}
-
-.welcome-section h1 {
-  margin-top: 24px;
-  font-size: 2.1rem;
-  margin-bottom: 3px;
+  backdrop-filter: none;
+  padding: 0;
+  font-family: cursive;
+  /* Gradient text instead of background fill */
+  font-size: 1.6rem;
   font-weight: 800;
-  letter-spacing: .7px;
-  color: #e6f4f1;
-}
-
-.username-inline {
-  color: #47e5bc;
-}
-
-.welcome-section p {
-  font-size: 1.05rem;
-  margin-bottom: 19px;
-  color: #c6f1e7;
-}
-
-.course-selector {
-  margin-bottom: 24px;
-  font-size: 1.1rem;
-}
-
-.course-selector select {
-  font-size: 1rem;
-  padding: 7px 20px;
-  border-radius: 9px;
-  border: 1px solid #49c6e5;
-  outline: none;
-  margin-left: 8px;
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 38px;
-  margin-top: 20px;
-}
-
-.feature-card {
-  background: rgba(33, 35, 56, 0.92);
-  border-radius: 15px;
-  box-shadow: 0 2px 16px 0 #0fa3b1cc;
-  padding: 28px 20px;
-  text-align: center;
-}
-
-.feature-card h2 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-
-.feature-card p {
-  font-size: 1.03rem;
-  margin-bottom: 11px;
-}
-
-.feature-card progress {
-  width: 94%;
-  height: 16px;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-
-@media (max-width: 900px) {
-  .main-content {
-    padding: 24px 8vw;
-  }
-  .sidebar {
-    width: 50vw;
-    min-width: 130px;
-  }
-}
-
-@media (max-width: 640px) {
-  .home-page {
-    flex-direction: column;
-  }
-  .sidebar {
-    width: 100vw;
-    flex-direction: row;
-    justify-content: space-between;
-    height: auto;
-    padding: 14px 12px;
-  }
-  .main-content {
-    padding: 18px 5vw;
-  }
-  
-  .sticker {
-  position: absolute;   /* or 'fixed' if you want it to stay during scroll */
-  top: 30px;
-  left: 30px;
-  border-radius: 20px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  letter-spacing: 2px;
+  /* background-image: linear-gradient(90deg, #b57eff, #6cf2f2 50%, #ffe066 100%); */
   background: white;
-  padding: 10px;
-  width: fit-content;
-  transition: transform 0.3s ease;
-  z-index: 10;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+
+  /* Just a subtle text shadow for visibility on the hero bg */
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  z-index: 3;
+}
+.course-badge .sparkle {
+  font-size: 1.4rem;
+  pointer-events: none;
+  animation: sparklePulse 2.5s infinite;
+}
+.course-badge .sparkle {
+  font-size: 1.5rem;
+  pointer-events: none;
+  animation: sparklePulse 2.5s infinite;
+}
+@keyframes shineBadge {
+  from { filter: brightness(1); }
+  40% { filter: brightness(1.1);}
+  67% { filter: brightness(1.18);}
+  to { filter: brightness(1);}
+}
+@keyframes sparklePulse {
+  0%, 100% { transform: rotate(-18deg) scale(1); filter: blur(0);}
+  50% { transform: rotate(6deg) scale(1.13); filter: blur(1px);}
 }
 
-.sticker:hover {
-  transform: scale(1.05) rotate(-1deg);
+.hero {
+  background: url('../space3.jpg') no-repeat center center/cover;
+  height: 90vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  padding: 40px; padding-bottom: 60px;
+  position: relative; /* Added so .course-badge abs position is relative to hero */
+  z-index: 2;
+}
+.welcome-text {
+  font-family: cursive;
+  text-align: center; margin-top: 7px; padding: 18px;
+}
+.welcome-text h1 {
+  font-size: 64px; font-weight: bold;
+  /* background: linear-gradient(90deg, #a855f7, #6366f1); */
+  /* background: linear-gradient(90deg, #e5d7f1, #999af3); */
+  background: white;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 36px;
+}
+.welcome-text h1 span { display: block; }
+.welcome-text p { font-size: 20px; color: #ffffff; margin: 0; }
+
+/* Start Quiz Button */
+.hero .hero-btn {
+  margin-top: 24px;
+  background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+  color: white;
+  padding: 20px 42px;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #b084f7, 0 0 30px #d09aff, 0 0 45px #c77dff;
+  animation: glowViolet 2.2s ease-in-out infinite alternate, floatMainBtn 3s ease-in-out infinite;
+  transition: background 0.3s, transform 0.18s;
+  letter-spacing: 1px;
+}
+@keyframes glowViolet {
+  from { box-shadow: 0 0 10px #a066f7, 0 0 20px #c68cff, 0 0 30px #cc99ff; }
+  to { box-shadow: 0 0 20px #c07cff, 0 0 35px #dd99ff, 0 0 50px #e6b3ff; }
+}
+@keyframes floatMainBtn {
+  0% { transform: translateY(0);}
+  50% { transform: translateY(-13px);}
+  100% { transform: translateY(0);}
+}
+.hero .hero-btn:hover {
+  background: linear-gradient(135deg, #a07afd, #1b1db6);
+  color: #3e2482;
+  box-shadow: 0 0 30px #1b1db6;
+  transform: scale(1.04);
 }
 
-.sticker img {
-  width: 180px;  /* or any smaller size */
-  border-radius: 15px;
-  display: block;
+.learn-heading { text-align: center; margin-top: 30px; margin-bottom: 30px;}
+.learn-heading h2 {
+  font-size: 32px;
+  font-family: cursive;
+  background: linear-gradient(90deg, #a855f7, #fbc2eb 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 14px 0;
+  letter-spacing: 1px;
+  font-weight: 800;
+  animation: pulseColor 2s infinite;
 }
+@keyframes pulseColor { 0%,100% { filter: brightness(1); } 50% { filter: brightness(1.4);} }
 
 
-
-  
-}
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; padding: 80px 40px; background-color: #121232;}
+.feature-card { background: rgba(255,255,255,0.05); border: 1px solid #444; border-radius: 16px; padding: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); animation: float 3s ease-in-out infinite; transition: transform 0.3s;}
+.feature-card:hover { transform: translateY(-10px) scale(1.05);}
+.feature-card img { width: 60px; margin-bottom: 10px;}
+.feature-card h3 { font-size: 18px; margin-top: 5px; margin-bottom: 10px;}
+.feature-card p { font-size: 14px; color: #ddd;}
+.blogs { padding: 60px 40px; background-color: #0d0d2b;}
+.blogs h2 { text-align: center; margin-bottom: 40px; color: #b57eff;}
+.blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px;}
+.blog-card { background: #1a1a3c; border-radius: 16px; overflow: hidden; color: white; box-shadow: 0 0 20px rgba(181,126,255,0.2); transition: transform 0.3s, box-shadow 0.3s;}
+.blog-card:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(181,126,255,0.4);}
+.blog-card img { width: 100%; height: 160px; object-fit: cover;}
+.blog-card .content { padding: 20px;}
