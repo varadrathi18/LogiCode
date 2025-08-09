@@ -3,7 +3,7 @@ const uname = localStorage.getItem('langx-username') || 'User';
 const lang = localStorage.getItem('langx-language') || 'your language';
 document.getElementById('welcome-user').textContent = `Hi, ${uname}!`;
 document.getElementById('language-line').textContent =
-  `Let's personalize your journey in ${lang}.`;
+  `Let's personalize your journey in Spanish.`;
 
 // Level select logic
 document.querySelectorAll('.level-card').forEach(card => {

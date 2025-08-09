@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Quiz Complete</title>
 <link rel="stylesheet" href="audio-quiz.css"/>
-<style>
+<!-- <style>
   .completion-content {
     background: rgba(255,255,255,0.9);
     border-radius: 24px;
@@ -34,15 +34,50 @@
     background: linear-gradient(90deg, #38bdd0, #ffe066);
     color: #1a213a;
   }
+</style> -->
+ <style>
+  .completion-content {
+    background: rgba(255,255,255,0.9);
+    /* border-radius: 24px;*/
+    padding: 42px 36px; 
+    text-align: center;
+    box-shadow: 0 8px 36px rgba(0,0,0,0.12);
+    width: 90%;
+    max-width: 480px;
+    /* margin: 32px auto; */
+    color: #1a213a;
+  margin: auto;
+  justify-content: center;
+  margin-top: 10%;
+    
+  }
+  button {
+    margin: 14px 18px;
+    padding: 14px 34px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 22px;
+    color: white;
+    cursor: pointer;
+    /* background: linear-gradient(90deg, #49c6e5, #47e5bc); */
+     background: linear-gradient(130deg, #232526 0%, #1a2980 50%, #26d0de 100%);
+    transition: background 0.3s;
+  }
+  button:hover {
+    /* background: linear-gradient(90deg, #38bdd0, #ffe066); */
+    background:linear-gradient(100deg, #4d84cc 0%, #49bcdf99 100%);
+    color: #1a213a;
+  }
 </style>
 </head>
-<body style="background: linear-gradient(130deg, #b6e0fe 0%, #f8fafc 90%)">
+<body style="background-image: '../spaceq.jpg';">
   <div class="completion-content">
     <h1>Congratulations!</h1>
     <p>Congratulations! You have successfully completed the Spanish Intermediate course 🎉🎉</p>
     <p>Your total points: <strong id="final-points">0</strong></p>
     <div>
-      <button onclick="window.location.href='../spquiz/spanish-pro-q1.html'">Go to Pro Level</button>
+      <button onclick="window.location.href='../spquiz/spanish-pro-q1.html'">Go to Pro Level</button><br>
       <button onclick="window.location.href='../homeSP/index.html'">Go to Home</button>
     </div>
   </div>

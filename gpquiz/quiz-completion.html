@@ -8,18 +8,21 @@
 <style>
   .completion-popup {
     background: rgba(255,255,255,0.95);
-    border-radius: 24px;
+    border-radius: 0%;
     box-shadow: 0 12px 40px rgba(0,0,0,0.15);
     max-width: 440px;
-    margin: 12vh auto;
+    margin: auto;
+    justify-content: center;
     text-align: center;
-    padding: 38px 36px;
+    padding: 42px 36px;
     font-family: 'Poppins', sans-serif;
     color: #1a213a;
     font-weight: 600;
+    margin-top: 12%;
   }
   .completion-popup h1 {
     font-size: 2rem;
+    color: #1a213a;
   }
   .completion-popup p {
     font-size: 1.2rem;
@@ -28,7 +31,7 @@
   .completion-popup button {
     font-size: 1.04rem;
     padding: 14px 30px;
-    background: linear-gradient(90deg,#49c6e5,#47e5bc);
+    background: linear-gradient(130deg, #232526 0%, #1a2980 50%, #26d0de 100%);
     border: none;
     border-radius: 22px;
     color: white;
@@ -37,12 +40,57 @@
     transition: background 0.3s;
   }
   .completion-popup button:hover {
-    background: linear-gradient(90deg,#38bdd0,#ffe066);
+    background:linear-gradient(100deg, #4d84cc 0%, #49bcdf99 100%);
     color: #1a213a;
   }
 </style>
+<!-- <style>
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+  }
+  .popup {
+    background: #fff;
+    padding: 42px 36px;
+    border-radius: 0%;
+    max-width: 400px;
+    width: 90vw;
+    text-align: center;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    font-family: 'Poppins', sans-serif;
+    color: #1a213a;
+    font-weight: 700;
+  }
+  .popup h1 {
+    font-size: 2.1rem;
+    color: #1a213a;
+    margin-bottom: 16px;
+  }
+  .popup button {
+    /* background: linear-gradient(90deg, #49c6e5, #47e5bc); */
+     background: linear-gradient(130deg, #232526 0%, #1a2980 50%, #26d0de 100%);
+    color: #fff;
+    font-size: 1.15rem;
+    padding: 14px 32px;
+    border: none;
+    border-radius:22px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .popup button:hover {
+    /* background: linear-gradient(90deg, #38bdd0, #ffe066); */
+    background:linear-gradient(100deg, #4d84cc 0%, #49bcdf99 100%);
+    color: #1a213a;
+  }
+</style>  -->
+
 </head>
-<body style="background: linear-gradient(130deg, #b6e0fe 0%, #f8fafc 90%)">
+<body style="background-image: '../spaceq.jpg';">
   <div class="completion-popup" tabindex="0">
     <h1>Congratulations!</h1>
     <p>You have successfully completed the German course 🎉🎉</p>

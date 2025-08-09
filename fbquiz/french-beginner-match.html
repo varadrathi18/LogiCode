@@ -8,8 +8,10 @@
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
   body, html {
     min-height: 100vh;
-    background: linear-gradient(130deg, #d0e6ff 0%, #f8fbff 95%);
-    color: #2d3559;
+    /* background: linear-gradient(130deg, #d0e6ff 0%, #f8fbff 95%); */
+    background: url('../spaceq.jpg') no-repeat center center fixed;
+    color: #1a2980;
+    background-size: cover;
     font-family: 'Poppins', sans-serif;
     margin: 0; padding: 0;
     display: flex; justify-content: center; align-items: center;
@@ -17,10 +19,12 @@
   .quiz-bg {
     width: 95%;
     max-width: 640px;
-    background: linear-gradient(180deg, #ffffffdd 0%, #ccccffcc 100%);
-    border-radius: 26px;
+     background: linear-gradient(180deg, #ffffffdd 0%, #ccccffcc 100%); 
+    
+    /* border-radius: 26px; */
     padding: 20px 24px 34px 24px;
-    box-shadow: 0 14px 48px rgba(40,40,90,0.1);
+    /* box-shadow: 0 14px 48px rgba(40,40,90,0.1); */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
     position: relative;
   }
   .quiz-topbar {
@@ -61,7 +65,7 @@
     width: 90%;
     max-width: 620px;
     margin: auto;
-    background: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,1);
     border-radius: 24px;
     box-shadow: 0 12px 36px rgba(0,0,0,0.1);
     padding: 28px 18px 42px 18px;
@@ -75,9 +79,11 @@
     flex: 1;
     list-style: none;
     padding: 0 12px;
-    background: #d2eafb;
+    /* background: #d2eafb; */
+    background: white;
     border-radius: 14px;
-    box-shadow: 0 4px 12px #88b3e9aa;
+    /* box-shadow: 0 4px 12px #88b3e9aa; */
+      /* box-shadow: 0 4px 8px rgba(0,0,0,0.5); */
     min-height: 280px;
     display: flex;
     flex-direction: column;
@@ -85,12 +91,13 @@
     cursor: default;
   }
   .list li {
-    background: #ffffffcc;
+    /* background: #ffffffcc; */
+     background: linear-gradient(130deg, #232526 0%, #1a2980 50%, #26d0de 100%);
     border-radius: 13px;
     padding: 14px 18px;
     font-weight: 600;
     font-size: 1.1rem;
-    color: #134dc1;
+    color: #ffffff;
     text-align: center;
     border: 3px solid transparent;
     transition: border-color 0.2s, background-color 0.2s;
@@ -98,12 +105,14 @@
   }
   .list li.dragging {
     opacity: 0.5;
-    background-color: #54a0ff;
+    /* background-color: #54a0ff; */
+     background:linear-gradient(100deg, #4d84cc 0%, #49bcdf99 100%);
     color: white;
     border-color: #0d3b99;
   }
   .list li.matched {
-    background-color: #38bdd0;
+    /* background-color: #38bdd0; */
+     background:linear-gradient(100deg, #4d84cc 0%, #49bcdf99 100%);
     color: white;
     border-color: #1a2980;
     cursor: default;
@@ -112,6 +121,7 @@
   }
   .list li.over {
     border-color: #61dafb;
+   
   }
   #popup-zone .popup-overlay {
     position: fixed;
