@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lottie Animation Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: url('../spaceq.jpg') no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    dotlottie-wc {
+      width: 4000px;  /* Bigger than before */
+      height: 800px;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Lottie Animation -->
+  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+  <dotlottie-wc 
+    src="https://lottie.host/aed8ce2e-73d8-41b7-b14f-bf265d3d0607/60pWBaBYnr.lottie"
+    speed="1" 
+    autoplay 
+    loop>
+  </dotlottie-wc>
+
+</body>
+<script>
+    // Redirect after 5 seconds
+    setTimeout(function(){
+      window.location.href = "../giquiz/german-intermediate-q1.html"; // Change to your second page URL
+    }, 5000);
+  </script>
+</html>

@@ -6,49 +6,9 @@
 <title>Quiz Complete</title>
 <link rel="stylesheet" href="audio-quiz.css" />
 <style>
-  .completion-popup {
-    background: rgba(255,255,255,0.95);
-    border-radius: 0%;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-    max-width: 440px;
-    margin: auto;
-    justify-content: center;
-    text-align: center;
-    padding: 42px 36px;
-    font-family: 'Poppins', sans-serif;
-    color: #1a213a;
-    font-weight: 600;
-    margin-top: 12%;
-  }
-  .completion-popup h1 {
-    font-size: 2rem;
-    color: #1a213a;
-  }
-  .completion-popup p {
-    font-size: 1.2rem;
-    margin: 18px 0 34px 0;
-  }
-  .completion-popup button {
-    font-size: 1.04rem;
-    padding: 14px 30px;
-    background: linear-gradient(130deg, #232526 0%, #1a2980 50%, #26d0de 100%);
-    border: none;
-    border-radius: 22px;
-    color: white;
-    cursor: pointer;
-    font-weight: 700;
-    transition: background 0.3s;
-  }
-  .completion-popup button:hover {
-    background:linear-gradient(100deg, #4d84cc 0%, #49bcdf99 100%);
-    color: #1a213a;
-  }
-</style>
-<!-- <style>
   .popup-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.55);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,6 +25,8 @@
     font-family: 'Poppins', sans-serif;
     color: #1a213a;
     font-weight: 700;
+    position: relative;
+    z-index: 2; /* Ensures popup is above confetti */
   }
   .popup h1 {
     font-size: 2.1rem;
@@ -72,7 +34,6 @@
     margin-bottom: 16px;
   }
   .popup button {
-    /* background: linear-gradient(90deg, #49c6e5, #47e5bc); */
      background: linear-gradient(130deg, #232526 0%, #1a2980 50%, #26d0de 100%);
     color: #fff;
     font-size: 1.15rem;
@@ -83,18 +44,66 @@
     transition: background 0.3s ease;
   }
   .popup button:hover {
-    /* background: linear-gradient(90deg, #38bdd0, #ffe066); */
     background:linear-gradient(100deg, #4d84cc 0%, #49bcdf99 100%);
     color: #1a213a;
   }
-</style>  -->
-
+  /* Confetti canvas */
+  #confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 3500; /* Above popup text */
+  }
+</style>
 </head>
-<body style="background-image: '../spaceq.jpg';">
-  <div class="completion-popup" tabindex="0">
-    <h1>Congratulations!</h1>
-    <p>You have successfully completed the German course 🎉🎉</p>
-    <button onclick="window.location.href='../page2/page2.html'">New Language, same rocket🚀</button>
-  </div>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+  window.onload = () => {
+    // Create popup
+    const popup = document.createElement('div');
+    popup.className = 'popup-overlay';
+    popup.innerHTML = `
+      <div class="popup">
+        <h1>Congratulations!</h1>
+        <p>You have successfully completed the German course 🎉🎉</p>
+        <button onclick="window.location.href='../page2/page2.html'">New Language, same rocket🚀</button>
+      </div>
+    `;
+    document.body.appendChild(popup);
+
+    // Add confetti canvas
+    const confettiCanvas = document.createElement('canvas');
+    confettiCanvas.id = 'confetti-canvas';
+    confettiCanvas.width = window.innerWidth;
+    confettiCanvas.height = window.innerHeight;
+    document.body.appendChild(confettiCanvas);
+
+    const myConfetti = confetti.create(confettiCanvas, { resize: true });
+
+    // Burst confetti when popup appears
+    myConfetti({
+      particleCount: 150,
+      spread: 100,
+      origin: { y: 0.6 }
+    });
+
+    // Optional: Repeat smaller bursts for a few seconds
+    let count = 0;
+    const interval = setInterval(() => {
+      myConfetti({
+        particleCount: 50,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+      count++;
+      if (count > 4) clearInterval(interval);
+    }, 700);
+  };
+</script>
+
 </body>
 </html>

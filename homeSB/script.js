@@ -48,7 +48,7 @@ function setupStartQuizButton() {
       // localStorage.setItem(STORAGE_PREFIX + 'points', '0');
 
       // Navigate to the first quiz question page
-      window.location.href = '../sbquiz/spanish-beginner-q1.html';  // Update this URL as needed
+      window.location.href = '../anim/sb.html';  // Update this URL as needed
     });
   }
 }

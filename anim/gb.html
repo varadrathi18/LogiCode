@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rocket Animation</title>
+  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    dotlottie-wc {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <dotlottie-wc
+    id="rocketAnimation"
+    src="https://lottie.host/fe237232-88a2-468b-9900-b7010018a7dd/zrhnmNYKMw.lottie"
+    speed="1"
+    autoplay
+    loop>
+  </dotlottie-wc>
+
+  <script>
+    // Wait 4 seconds, then go to next page
+    setTimeout(() => {
+      window.location.href = "../gbquiz/german-quiz-q1.html"; // change this to your actual page
+    }, 3400); // 4000 milliseconds = 4 seconds
+  </script>
+</body>
+</html>

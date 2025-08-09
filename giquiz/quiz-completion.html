@@ -1,55 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quiz Complete</title>
-  <link rel="stylesheet" href="audio-quiz.css" />
-  <!-- <style>
-    .completion-content {
-      background: rgba(255,255,255,0.9);
-      border-radius: 24px;
-      padding: 50px 40px;
-      text-align: center;
-      box-shadow: 0 8px 36px rgba(0,0,0,0.12);
-      width: 90%;
-      max-width: 480px;
-      margin: 32px auto;
-      color: #2d3559;
-    }
-    button {
-      margin: 14px 18px;
-      padding: 14px 34px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 22px;
-      color: white;
-      cursor: pointer;
-      background: linear-gradient(90deg, #49c6e5, #47e5bc);
-      transition: background 0.3s;
-    }
-    button:hover {
-      background: linear-gradient(90deg, #38bdd0, #ffe066);
-      color: #1a213a;
-    }
-  </style> -->
-   <style>
-  .completion-content {
-    background: rgba(255,255,255,0.9);
-    /* border-radius: 24px;*/
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Congratulations</title>
+<style>
+  html, body {
+    height: 100%;                /* Full viewport height */
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background-image: url('../spaceq.jpg');
+    background-size: cover;       /* Cover the whole screen */
+    background-position: center;  /* Center image */
+    background-repeat: no-repeat; /* No repeat */
+    display: flex;                /* Center container */
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container {
+    background-color: #fff;
     padding: 42px 36px; 
     text-align: center;
-    box-shadow: 0 8px 36px rgba(0,0,0,0.12);
+    box-shadow: 0 8px 36px rgba(0,0,0,1);
     width: 90%;
     max-width: 480px;
-    /* margin: 32px auto; */
     color: #1a213a;
-  margin: auto;
-  justify-content: center;
-  margin-top: 10%;
-    
+    border-radius: 10px;
+    position: relative;
+    z-index: 1;
   }
+
   button {
     margin: 14px 18px;
     padding: 14px 34px;
@@ -59,29 +44,58 @@
     border-radius: 22px;
     color: white;
     cursor: pointer;
-    /* background: linear-gradient(90deg, #49c6e5, #47e5bc); */
-     background: linear-gradient(130deg, #232526 0%, #1a2980 50%, #26d0de 100%);
+    background: linear-gradient(130deg, #232526 0%, #1a2980 50%, #26d0de 100%);
     transition: background 0.3s;
   }
+
   button:hover {
-    /* background: linear-gradient(90deg, #38bdd0, #ffe066); */
-    background:linear-gradient(100deg, #4d84cc 0%, #49bcdf99 100%);
+    background: linear-gradient(100deg, #4d84cc 0%, #49bcdf99 100%);
     color: #1a213a;
+  }
+
+  /* Text Styling */
+  h1, p {
+    position: relative;
+    z-index: 2; /* Above background, but below animation if needed */
+  }
+
+  /* Animation on top of text */
+  .animation-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3; /* Higher than text */
+    pointer-events: none; /* Allow clicking through */
   }
 </style>
 </head>
-<body style="background-image: '../spaceq.jpg';">
-  <div class="completion-content">
-    <h1>Congratulations!</h1>
-    <p>You have successfully completed the German Intermediate course 🎉🎉</p>
-    <p>Your total points: <strong id="final-points">0</strong></p>
-    <div>
-      <button onclick="window.location.href='../gpquiz/german-pro-q1.html'">Go to Pro Level</button><br>
-      <button onclick="window.location.href='../homeGP/index.html'">Go to Home</button>
-    </div>
+<body>
+
+<div class="container">
+  <h1>Congratulations!</h1>
+  <p>You have successfully completed the German Intermediate course 🎉🎉</p>
+  <p>Your total points: <strong id="final-points">0</strong></p>
+  <div>
+      <button onclick="window.location.href='../anim/gi1.html'">Go to Pro Level</button>
+      <button onclick="window.location.href='../anim/gi2.html'">Go to Home</button>
   </div>
-  <script>
-    document.getElementById('final-points').textContent = localStorage.getItem('quizPoints') || '0';
-  </script>
+
+  <!-- Animation Layer -->
+  <div class="animation-overlay">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+    <dotlottie-wc src="https://lottie.host/0039a53b-3545-4b26-863c-a82cf42e84ff/arQNEBIEVa.lottie"
+                  style="width: 300px; height: 300px"
+                  speed="1"
+                  autoplay
+                  loop>
+    </dotlottie-wc>
+  </div>
+</div>
+
+<script>
+  document.getElementById('final-points').textContent = localStorage.getItem('quizPoints') || '0';
+</script>
+
 </body>
 </html>

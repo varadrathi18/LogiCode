@@ -48,7 +48,7 @@ function setupStartQuizButton() {
       // localStorage.setItem(STORAGE_PREFIX + 'points', '0');
 
       // Navigate to the first quiz question page
-      window.location.href = '../gpquiz/german-pro-q1.html';  // Update this URL as needed
+      window.location.href = '../anim/gp.html';  // Update this URL as needed
     });
   }
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: url('../space3.jpg') no-repeat center center/cover; /* Change to your image */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Lottie Animation -->
+  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+  <dotlottie-wc 
+    src="https://lottie.host/610631e0-d82e-4e7e-b638-8b6923c56eea/TdgUoMTsiO.lottie" 
+    style="width: 1000px; height: 600px;" 
+    speed="1" 
+    autoplay 
+    loop>
+  </dotlottie-wc>
+
+  <script>
+    // Redirect after 5 seconds
+    setTimeout(function(){
+      window.location.href = "../homeGI/index.html"; // Change this to your target page
+    }, 4000);
+  </script>
+
+</body>
+</html>
