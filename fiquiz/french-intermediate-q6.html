@@ -19,21 +19,22 @@
   </div>
   <div class="quiz-content">
     <div class="quiz-audio-word">
-      <span id="english-word">Chair</span>
+      <img src="../window.png" alt="window" width="150" height="100">
+      <!-- <span id="english-word">Window</span> -->
       <button id="play-audio">&#9658;
-        <audio id="q-audio" src="fi5.mp3" autoplay></audio>
+        <audio id="q-audio" src="fp5.mp3" autoplay></audio>
       </button>
     </div>
     <ul class="choices">
-      <li data-correct="true">Chaise</li>
+      <li data-correct="true">Fenêtre</li>
       <li data-correct="false">Table</li>
       <li data-correct="false">Porte</li>
-      <li data-correct="false">Fenêtre</li>
+      <li data-correct="false">pomme</li>
     </ul>
   </div>
   <div id="popup-zone"></div>
 </div>
 <script src="audio-quiz.js"></script>
-<script>loadQuestion({answer:"Chaise", next:"quiz-completion.html"});</script>
+<script>loadQuestion({answer:"Fenêtre", next:"quiz-completion.html"});</script>
 </body>
 </html>
