@@ -6,7 +6,7 @@
   <title>French Pro Quiz Q3</title>
   <link rel="stylesheet" href="audio-quiz.css" />
   <style>
-    .sentence-prompt { font-size: 1.23rem; margin-bottom: 18px; color: #135dc1; font-weight: 700; text-align: center;}
+    .sentence-prompt { font-size: 1.23rem; margin-bottom: 18px; color: #135dc1; font-weight: 700; text-align: center; }
     .word-tiles { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 16px; }
     .word-tile {
       background: linear-gradient(135deg, #b3e0fe, #fbc2eb 70%);
@@ -70,7 +70,7 @@
       <div class="quiz-progress">
         <div class="progress-dot"></div>
         <div class="progress-dot"></div>
-        <div class="progress-dot active"></div> <!-- Q3 active -->
+        <div class="progress-dot active"></div> <!-- Q3 Active -->
         <div class="progress-dot"></div>
         <div class="progress-dot"></div>
         <div class="progress-dot"></div>
@@ -82,7 +82,7 @@
     </div>
 
     <div class="quiz-content">
-      <div class="sentence-prompt">Arrange the words to translate: <b>j'ai visité la Tour Eiffel</b></div>
+      <div class="sentence-prompt">Arrange the words to translate: <b>J'ai visité la Tour Eiffel</b></div>
       <div class="word-tiles" id="word-bank"></div>
       <div class="sentence-build-box" id="sentence-box"></div>
       <div class="sentence-actions">
@@ -94,102 +94,103 @@
     <div id="popup-zone"></div>
   </div>
 
-  <script>
-    // Correct answer in English
-    const correctSentence = ["I", "visited", "the", "Eiffel", "Tower"];
-    // Mix of correct and distractor words
-    const wordOptions = ["Tower", "Eiffel", "the", "visited", "I", "beautiful", "yesterday"];
+<script>
+  const correctSentence = ["I", "visited", "the", "Eiffel", "Tower"];
+  const wordOptions = ["visited", "Eiffel", "Tower", "I", "the", "yesterday", "beautiful"];
 
-    // Keep Beginner's prefix so Pro level continues the accumulated score
-    const STORAGE_PREFIX = "fr-beginner-"; 
-    const wordBank = document.getElementById('word-bank');
-    const sentenceBox = document.getElementById('sentence-box');
-    let currentSentence = [];
-    let usedIndices = [];
+  // Continue from Beginner scores
+  const STORAGE_PREFIX = "fr-beginner-";
+  const wordBank = document.getElementById('word-bank');
+  const sentenceBox = document.getElementById('sentence-box');
+  let currentSentence = [], usedIndices = [];
 
-    function updateStatusBar() {
+  function updateStatusBar() {
   document.getElementById('lives-count').textContent = localStorage.getItem('quizLives') || '5';
   document.getElementById('points-count').textContent = localStorage.getItem('quizPoints') || '0';
+}
+  updateStatusBar();
+
+  function renderWordBank() {
+    wordBank.innerHTML = '';
+    wordOptions.forEach((word, idx) => {
+      const tile = document.createElement('div');
+      tile.className = 'word-tile' + (usedIndices.includes(idx) ? ' used' : '');
+      tile.textContent = word;
+      if (!usedIndices.includes(idx)) tile.onclick = () => addWord(idx);
+      wordBank.appendChild(tile);
+    });
   }
-    
-    updateStatusBar();
 
-    function renderWordBank() {
-      wordBank.innerHTML = '';
-      wordOptions.forEach((word, idx) => {
-        const tile = document.createElement('div');
-        tile.className = 'word-tile' + (usedIndices.includes(idx) ? ' used' : '');
-        tile.textContent = word;
-        if (!usedIndices.includes(idx)) {
-          tile.onclick = () => addWord(idx);
-        }
-        wordBank.appendChild(tile);
-      });
-    }
+  function renderSentenceBox() {
+    sentenceBox.innerHTML = currentSentence.map(w => `<span class="sentence-output-word">${w}</span>`).join(' ');
+  }
 
-    function renderSentenceBox() {
-      sentenceBox.innerHTML = currentSentence
-        .map(w => <span class="sentence-output-word">${w}</span>)
-        .join(' ');
-    }
-
-    function addWord(idx) {
-      usedIndices.push(idx);
-      currentSentence.push(wordOptions[idx]);
-      renderWordBank();
-      renderSentenceBox();
-    }
-
-    document.getElementById('reset-btn').onclick = () => {
-      currentSentence = [];
-      usedIndices = [];
-      renderWordBank();
-      renderSentenceBox();
-    };
-
-    document.getElementById('submit-btn').onclick = () => {
-      let points = parseInt(localStorage.getItem(STORAGE_PREFIX + 'points') || '0');
-      let lives = parseInt(localStorage.getItem(STORAGE_PREFIX + 'lives') || '5');
-      if (currentSentence.join(' ') === correctSentence.join(' ')) {
-        points += 20;
-        localStorage.setItem(STORAGE_PREFIX + 'points', points);
-        updateStatusBar();
-        showPopup("Great job!", "You built the correct sentence!<br>+20 points", true);
-      } else {
-        lives = Math.max(0, lives - 1);
-        localStorage.setItem(STORAGE_PREFIX + 'lives', lives);
-        updateStatusBar();
-        if (lives <= 0) {
-          showPopup("No lives left!", "You've used all your lives.", false, true);
-        } else {
-          showPopup("Oops!", "That's not correct. Try again!<br>-1 life", false);
-        }
-      }
-    };
-
-    function showPopup(title, msg, success, gameOver = false) {
-      const popupZone = document.getElementById('popup-zone');
-      popupZone.innerHTML = `<div class="popup-overlay">
-        <div class="popup">
-          <h1${success ? '' : " class='wrong'"}>${title}</h1>
-          <h2>${msg}</h2>
-          ${gameOver 
-            ? <button onclick="window.location.href='../homeFP/index.html'">Go to Home</button>
-            : <button onclick="continueQuiz()">Continue</button>}
-        </div>
-      </div>`;
-      document.querySelector('.popup button').focus();
-    }
-
-    window.continueQuiz = function() {
-      document.getElementById('popup-zone').innerHTML = '';
-      // Go to Q4 of French Pro
-      window.location.href = 'french-pro-q4-match.html';
-    };
-
-    // Initialize tiles
+  function addWord(idx) {
+    usedIndices.push(idx);
+    currentSentence.push(wordOptions[idx]);
     renderWordBank();
     renderSentenceBox();
-  </script>
+  }
+
+  document.getElementById('reset-btn').onclick = () => {
+    currentSentence = [];
+    usedIndices = [];
+    renderWordBank();
+    renderSentenceBox();
+  };
+
+  document.getElementById('submit-btn').onclick = () => {
+      let lives = parseInt(localStorage.getItem('quizLives') || '5');
+      let points = parseInt(localStorage.getItem('quizPoints') || '0');
+
+    if (currentSentence.join(' ') === correctSentence.join(' ')) {
+      points += 20;
+              localStorage.setItem('quizPoints', points);
+      updateStatusBar();
+      playPopupAudio("../pass.mp3"); // ✅ Correct sound
+      showPopup("Great job!", "You built the correct sentence!<br>+20 points", true);
+    } else {
+      lives = Math.max(0, lives - 1);
+        localStorage.setItem('quizLives', lives);
+      updateStatusBar();
+      playPopupAudio("../fail.mp3"); // ❌ Wrong sound
+      if (lives <= 0) {
+        showPopup("No lives left!", "You've used all your lives.", false, true);
+      } else {
+        showPopup("Oops!", "That's not correct.<br>-1 life", false);
+      }
+    }
+  };
+
+  function showPopup(title, msg, success, gameOver = false) {
+    const popupZone = document.getElementById('popup-zone');
+    popupZone.innerHTML = `<div class="popup-overlay">
+      <div class="popup">
+        <h1${success ? '' : " class='wrong'"}>${title}</h1>
+        <h2>${msg}</h2>
+        ${gameOver 
+          ? `<button onclick="window.location.href='../homeFP/index.html'">Go to Home</button>`
+          : `<button onclick="continueQuiz()">Continue</button>`}
+      </div>
+    </div>`;
+    document.querySelector('.popup button').focus();
+  }
+
+  window.continueQuiz = () => {
+    document.getElementById('popup-zone').innerHTML = '';
+    window.location.href = 'french-pro-q4-match.html';
+  };
+
+  // 🔊 Audio helper
+  function playPopupAudio(src) {
+    const audio = new Audio(src);
+    audio.play().catch(err => {
+      console.log("Audio autoplay blocked:", err);
+    });
+  }
+
+  renderWordBank();
+  renderSentenceBox();
+</script>
 </body>
 </html>

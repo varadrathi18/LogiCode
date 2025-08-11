@@ -6,7 +6,7 @@
   <title>German Intermediate Quiz Q3</title>
   <link rel="stylesheet" href="audio-quiz.css" />
   <style>
-    .sentence-prompt { font-size: 1.23rem; margin-bottom: 18px; color: #135dc1; font-weight: 700; text-align: center;}
+    .sentence-prompt { font-size: 1.23rem; margin-bottom: 18px; color: #135dc1; font-weight: 700; text-align: center; }
     .word-tiles { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 16px; }
     .word-tile {
       background: linear-gradient(135deg, #b3e0fe, #fbc2eb 70%);
@@ -21,19 +21,47 @@
       box-shadow: 0 2px 12px #135dc12a;
       user-select: none;
     }
-    .word-tile:hover { background: linear-gradient(135deg, #9fd1ff, #f8d4ee); }
-    .word-tile.used { background: #d4f7e6; color: #535381; opacity: 0.6; pointer-events: none; }
+    .word-tile:hover {
+      background: linear-gradient(135deg, #9fd1ff, #f8d4ee);
+    }
+    .word-tile.used {
+      background: #d4f7e6;
+      color: #535381;
+      opacity: 0.6;
+      pointer-events: none;
+    }
     .sentence-build-box {
-      min-height: 40px; background: #f8f9fa; border-radius: 14px; padding: 16px;
-      font-size: 1.18rem; margin-bottom: 18px; text-align: center;
+      min-height: 40px;
+      background: #f8f9fa;
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 1.18rem;
+      margin-bottom: 18px;
+      text-align: center;
     }
-    .sentence-output-word { margin-right: 8px; font-weight: 650; color: #134dc1; }
-    .sentence-actions { margin-top: 10px; text-align: center; }
+    .sentence-output-word {
+      margin-right: 8px;
+      font-weight: 650;
+      color: #134dc1;
+    }
+    .sentence-actions {
+      margin-top: 10px;
+      text-align: center;
+    }
     .sentence-actions button {
-      margin: 0 8px; font-size: 1rem; border-radius: 9px; padding: 8px 20px;
-      background: #38bdd0; color: #fff; border: none; cursor: pointer; transition: background .2s;
+      margin: 0 8px;
+      font-size: 1rem;
+      border-radius: 9px;
+      padding: 8px 20px;
+      background: #38bdd0;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background .2s;
     }
-    .sentence-actions button:hover { background: #2b9cad; }
+    .sentence-actions button:hover {
+      background: #2b9cad;
+    }
   </style>
 </head>
 <body>
@@ -42,7 +70,7 @@
       <div class="quiz-progress">
         <div class="progress-dot"></div>
         <div class="progress-dot"></div>
-        <div class="progress-dot active"></div>
+        <div class="progress-dot active"></div> <!-- Q3 active -->
         <div class="progress-dot"></div>
         <div class="progress-dot"></div>
         <div class="progress-dot"></div>
@@ -68,9 +96,10 @@
 
 <script>
   const correctSentence = ["I", "am", "going", "to", "the", "park"];
-  const wordOptions = ["am", "I", "going", "park", "the", "to", "quickly"];
+  const wordOptions = ["the", "am", "going", "to", "I", "park", "quickly"];
 
-  const STORAGE_PREFIX = "de-beginner-"; // continue score from German Beginner
+  // Continue scoring from German Beginner
+  const STORAGE_PREFIX = "de-beginner-";
   const wordBank = document.getElementById('word-bank');
   const sentenceBox = document.getElementById('sentence-box');
   let currentSentence = [], usedIndices = [];
@@ -93,7 +122,7 @@
   }
 
   function renderSentenceBox() {
-    sentenceBox.innerHTML = currentSentence.map(w => <span class="sentence-output-word">${w}</span>).join(' ');
+    sentenceBox.innerHTML = currentSentence.map(w => `<span class="sentence-output-word">${w}</span>`).join(' ');
   }
 
   function addWord(idx) {
@@ -104,22 +133,27 @@
   }
 
   document.getElementById('reset-btn').onclick = () => {
-    currentSentence = []; usedIndices = [];
-    renderWordBank(); renderSentenceBox();
+    currentSentence = [];
+    usedIndices = [];
+    renderWordBank();
+    renderSentenceBox();
   };
 
   document.getElementById('submit-btn').onclick = () => {
-    let points = parseInt(localStorage.getItem(STORAGE_PREFIX + 'points') || '0');
-    let lives = parseInt(localStorage.getItem(STORAGE_PREFIX + 'lives') || '5');
+      let lives = parseInt(localStorage.getItem('quizLives') || '5');
+      let points = parseInt(localStorage.getItem('quizPoints') || '0');
+
     if (currentSentence.join(' ') === correctSentence.join(' ')) {
       points += 20;
-      localStorage.setItem(STORAGE_PREFIX + 'points', points);
-      updateStatusBar();
+          localStorage.setItem('quizPoints', points);     
+           updateStatusBar();
+      playPopupAudio("../pass.mp3"); // ✅ correct sound
       showPopup("Great job!", "You built the correct sentence!<br>+20 points", true);
     } else {
       lives = Math.max(0, lives - 1);
-      localStorage.setItem(STORAGE_PREFIX + 'lives', lives);
+        localStorage.setItem('quizLives', lives);
       updateStatusBar();
+      playPopupAudio("../fail.mp3"); // ❌ wrong sound
       if (lives <= 0) {
         showPopup("No lives left!", "You've used all your lives.", false, true);
       } else {
@@ -135,17 +169,25 @@
         <h1${success ? '' : " class='wrong'"}>${title}</h1>
         <h2>${msg}</h2>
         ${gameOver 
-          ? <button onclick="window.location.href='../homeGI/index.html'">Go to Home</button>
-          : <button onclick="continueQuiz()">Continue</button>}
+          ? `<button onclick="window.location.href='../homeGI/index.html'">Go to Home</button>`
+          : `<button onclick="continueQuiz()">Continue</button>`}
       </div>
     </div>`;
     document.querySelector('.popup button').focus();
   }
 
-  window.continueQuiz = function() {
+  window.continueQuiz = () => {
     document.getElementById('popup-zone').innerHTML = '';
     window.location.href = 'german-intermediate-q4-match.html';
   };
+
+  // 🔊 play audio helper
+  function playPopupAudio(src) {
+    const audio = new Audio(src);
+    audio.play().catch(err => {
+      console.log("Audio autoplay blocked or failed:", err);
+    });
+  }
 
   renderWordBank();
   renderSentenceBox();
