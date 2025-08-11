@@ -186,8 +186,12 @@ color: white;
 .feature-card img { width: 60px; margin-bottom: 10px;}
 .feature-card h3 { font-size: 18px; margin-top: 5px; margin-bottom: 10px;}
 .feature-card p { font-size: 14px; color: #ddd;}
+.learn { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; padding: 80px 40px; background-color: #121232;}
+.learn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px;}
+.learn-card { background: #1a1a3c; border-radius: 16px; overflow: hidden; color: white; box-shadow: 0 0 20px rgba(181,126,255,0.2); transition: transform 0.3s, box-shadow 0.3s;}
+.learn h1 { text-align: center; margin-top: 20px; margin-bottom: 40px; color: #b57eff;}
 .blogs { padding: 60px 40px; background-color: #0d0d2b;}
-.blogs h2 { text-align: center; margin-bottom: 40px; color: #b57eff;}
+.blogs h1 { text-align: center; margin-bottom: 40px; color: #b57eff;}
 .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px;}
 .blog-card { background: #1a1a3c; border-radius: 16px; overflow: hidden; color: white; box-shadow: 0 0 20px rgba(181,126,255,0.2); transition: transform 0.3s, box-shadow 0.3s;}
 .blog-card:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(181,126,255,0.4);}

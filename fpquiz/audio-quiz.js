@@ -14,6 +14,18 @@ function updateStatusBar() {
 updateStatusBar();
 
 function loadQuestion(cfg) {
+    const audioEl = document.getElementById('q-audio');
+
+  // ✅ Autoplay attempt on page load
+  document.addEventListener('DOMContentLoaded', function () {
+    if (audioEl) {
+      setTimeout(() => {
+        audioEl.play().catch(() => {
+          // Autoplay blocked; user can click to play
+        });
+      }, 400);
+    }
+  });
   // Support audio play when clicking word or button
   document.querySelectorAll('#french-word, #play-audio').forEach(el => {
     el.addEventListener('click', function(e) {

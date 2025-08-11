@@ -1,4 +1,121 @@
-(function(){
+// (function(){
+//   let page = location.pathname.split('/').pop();
+//   if (page === "french-beginner-q1.html" || page === "french-beginner-q1") {
+//     localStorage.setItem('quizPoints', "0");
+//     localStorage.setItem('quizLives', "5");
+//   }
+// })();
+
+// // Utility to update status bars on each page
+// function updateStatusBar() {
+//   document.getElementById('lives-count').textContent = localStorage.getItem('quizLives') || '5';
+//   document.getElementById('points-count').textContent = localStorage.getItem('quizPoints') || '0';
+// }
+// updateStatusBar();
+
+// function loadQuestion(cfg) {
+//   // Support audio play when clicking word or button
+//   document.querySelectorAll('#french-word, #play-audio').forEach(el => {
+//     el.addEventListener('click', function(e) {
+//       e.preventDefault();
+//       document.getElementById('q-audio').play();
+//     });
+//   });
+
+//   // Handle user answer
+//   let answered = false;
+//   document.querySelectorAll('.choices li').forEach(option => {
+//     option.addEventListener('click', function() {
+//       if (answered) return;
+//       answered = true;
+
+//       let isCorrect = option.dataset.correct === "true";
+//       let popup = document.createElement('div');
+//       popup.className = 'popup-overlay';
+
+//       let lives = parseInt(localStorage.getItem('quizLives') || '5');
+//       let points = parseInt(localStorage.getItem('quizPoints') || '0');
+//       let outOfLives = false;
+
+//       // Handle scoring
+//       if (isCorrect) {
+//         points += 20;
+//         localStorage.setItem('quizPoints', points);
+//       } else {
+//         lives = Math.max(0, lives - 1);
+//         localStorage.setItem('quizLives', lives);
+//         if (lives <= 0) outOfLives = true;
+//       }
+
+//       updateStatusBar();
+
+//       // Create popup HTML
+//       let popupHTML = '';
+//       if (outOfLives) {
+//         popupHTML = `
+//           <div class="popup">
+//             <h1 class="wrong">No Lives Left!</h1>
+//             <p>You've used all your lives.</p>
+//             <div class="buy-or-home">
+//               <button onclick="window.location.href='../homeFB/index.html'">Go to Home</button>
+//             </div>
+//           </div>
+//         `;
+//       } else if (isCorrect) {
+//         popupHTML = `
+//           <div class="popup">
+//             <h1>Hurray!</h1>
+//             <h2>Congratulations, you earned 20 points!</h2>
+//             <button onclick="proceedNext()">Next</button>
+//           </div>
+//         `;
+//         playPopupAudio("../pass.mp3");
+//       } else {
+//         popupHTML = `
+//           <div class="popup">
+//             <h1 class="wrong">Oops!</h1>
+//             <h2 class="wrong">Your answer is incorrect.<br>
+//               Correct answer: <span style='color:#134dc1'>${cfg.answer}</span>
+//             </h2>
+//             <button onclick="proceedNext()">Next</button>
+//           </div>
+//         `;
+//         playPopupAudio("../fail.mp3");
+//       }
+
+//       popup.innerHTML = popupHTML;
+//       document.body.appendChild(popup);
+
+//       // Optional: focus the button
+//       document.querySelector('.popup button').focus();
+//     });
+//   });
+
+//   // "Next Question" button
+//   window.proceedNext = function() {
+//     const popup = document.querySelector('.popup-overlay');
+//     if (popup) popup.remove();
+
+//     let lives = parseInt(localStorage.getItem('quizLives') || '0');
+//     if (lives <= 0) return;
+
+//     window.location.href = cfg.next;
+//   };
+// }
+
+// // 🔊 Function to play popup audio dynamically
+// function playPopupAudio(src) {
+//   const audio = new Audio(src);
+//   audio.play().catch(err => {
+//     console.log("Audio autoplay blocked or failed:", err);
+//   });
+// }
+
+// document.addEventListener('DOMContentLoaded', updateStatusBar);
+
+
+// Reset points/lives if it's the first beginner question page
+(function () {
   let page = location.pathname.split('/').pop();
   if (page === "french-beginner-q1.html" || page === "french-beginner-q1") {
     localStorage.setItem('quizPoints', "0");
@@ -8,24 +125,40 @@
 
 // Utility to update status bars on each page
 function updateStatusBar() {
-  document.getElementById('lives-count').textContent = localStorage.getItem('quizLives') || '5';
-  document.getElementById('points-count').textContent = localStorage.getItem('quizPoints') || '0';
+  document.getElementById('lives-count').textContent =
+    localStorage.getItem('quizLives') || '5';
+  document.getElementById('points-count').textContent =
+    localStorage.getItem('quizPoints') || '0';
 }
 updateStatusBar();
 
+// Main quiz question loader
 function loadQuestion(cfg) {
-  // Support audio play when clicking word or button
+  const audioEl = document.getElementById('q-audio');
+
+  // ✅ Autoplay attempt on page load
+  document.addEventListener('DOMContentLoaded', function () {
+    if (audioEl) {
+      setTimeout(() => {
+        audioEl.play().catch(() => {
+          // Autoplay blocked; user can click to play
+        });
+      }, 400);
+    }
+  });
+
+  // Support replay when clicking the word or play button
   document.querySelectorAll('#french-word, #play-audio').forEach(el => {
-    el.addEventListener('click', function(e) {
+    el.addEventListener('click', function (e) {
       e.preventDefault();
-      document.getElementById('q-audio').play();
+      if (audioEl) audioEl.play();
     });
   });
 
-  // Handle user answer
+  // Handle answer selection
   let answered = false;
   document.querySelectorAll('.choices li').forEach(option => {
-    option.addEventListener('click', function() {
+    option.addEventListener('click', function () {
       if (answered) return;
       answered = true;
 
@@ -37,7 +170,7 @@ function loadQuestion(cfg) {
       let points = parseInt(localStorage.getItem('quizPoints') || '0');
       let outOfLives = false;
 
-      // Handle scoring
+      // Scoring
       if (isCorrect) {
         points += 20;
         localStorage.setItem('quizPoints', points);
@@ -49,7 +182,7 @@ function loadQuestion(cfg) {
 
       updateStatusBar();
 
-      // Create popup HTML
+      // Build popup HTML
       let popupHTML = '';
       if (outOfLives) {
         popupHTML = `
@@ -86,13 +219,14 @@ function loadQuestion(cfg) {
       popup.innerHTML = popupHTML;
       document.body.appendChild(popup);
 
-      // Optional: focus the button
-      document.querySelector('.popup button').focus();
+      // Focus the popup button
+      const btn = document.querySelector('.popup button');
+      if (btn) btn.focus();
     });
   });
 
-  // "Next Question" button
-  window.proceedNext = function() {
+  // Proceed to next question
+  window.proceedNext = function () {
     const popup = document.querySelector('.popup-overlay');
     if (popup) popup.remove();
 
@@ -103,7 +237,7 @@ function loadQuestion(cfg) {
   };
 }
 
-// 🔊 Function to play popup audio dynamically
+// Helper to play popup audio
 function playPopupAudio(src) {
   const audio = new Audio(src);
   audio.play().catch(err => {
